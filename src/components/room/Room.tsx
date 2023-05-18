@@ -1,9 +1,7 @@
 import React from "react";
 
-function Room() {
-  return (
-    <p>Room</p>
-  )
+function Room(props:any) {
+  {return props.status? <p>Room</p>: null}
 }
 
 export default Room;
