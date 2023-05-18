@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Glagol from "../../App/Glagol";
 import Screen from "../Screen/Screen";
+import {useSelector} from "react-redux";
 
 if (!Glagol.xmpp.getInitialStatus()) {
   console.log()
@@ -15,17 +16,21 @@ if (!Glagol.xmpp.getInitialStatus()) {
 
 
 function Room() {
+  const createdRoom=useSelector((state: any)=>state.createdRoom)
   const [roomName, setRoomName]= useState('')
+  const [isCreatingUserName, setIsCreatingUserName] = useState<boolean>(true)
+  if (createdRoom) {
+    Glagol.xmpp.peerInit()
+    setIsCreatingUserName(false)
+  }
   useEffect(()=>{
     setRoomName(window.location.pathname.split('/')[1])
   }, [])
   const [userName, setUserName] = useState<string>("")
   const inputRef = createRef<any>()
-  const [isCreatingUserName, setIsCreatingUserName] = useState<boolean>(true)
+
   function createUserName() {
-    Glagol.xmpp.createRoom(roomName)
-    Glagol.xmpp.peerInit()
-    setIsCreatingUserName(false)
+   if (!createdRoom) Glagol.xmpp.createRoom(roomName)
   }
 
   function changeUserName() {

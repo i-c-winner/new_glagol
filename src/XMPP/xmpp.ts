@@ -7,7 +7,6 @@ const register: any = require('strophe-plugin-register')
 class XMPP {
   public xmpp: any;
   public conn: any;
-  private _listener: { [key: string]: [...Function[]] };
   private connection: any;
   private peerConnection: PeerConnection;
   private password: string;
@@ -17,7 +16,6 @@ class XMPP {
 
   constructor() {
     this.initialized = false
-    this._listener = {}
     this.conn = null
     this.connection = new Strophe.Connection('https://xmpp.prosolen.net:5281/http-bind')
     this.peerConnection = new PeerConnection()
@@ -111,12 +109,14 @@ class XMPP {
   }
 
   createRoom(roomName: string) {
+    console.log(' createRoom')
     const message = new Strophe.Builder('presence', {
       from: `${this.connection.jid}`,
       to: `${roomName}@conference.prosolen.net/${this.connection.jid.split('/')[1]}`
     }).c('x', {
       xmlns: 'http://jabber.org/protocol/muc'
     })
+    console.log(this.connection)
     this.connection.send(message)
   }
 
