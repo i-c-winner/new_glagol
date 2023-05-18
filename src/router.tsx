@@ -1,6 +1,6 @@
 import {createBrowserRouter} from "react-router-dom";
 import StartPage from "./strartPage";
-import Room from "./components/room/Room";
+import CreatedRoom from "./components/room/CreatedRoom";
 
 const router = createBrowserRouter([
   {
@@ -9,7 +9,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/:roomName',
-    element: <Room/>,
+    element: <StartPage />,
   },
 ])
 export default router

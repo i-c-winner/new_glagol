@@ -3,19 +3,26 @@ import {createSlice} from "@reduxjs/toolkit";
 const configSlice = createSlice({
   name: 'config',
   initialState: {
-    createdRoom: false,
-    roomName: undefined,
-
+    displayName: false,
+    roomName: false,
+    room: false,
+    XMPPConnected: false
   },
   reducers: {
-    changeRoomStatus: (state, action) => {
-      state.createdRoom = action.payload
+    changeDisplayName: (state, action) => {
+      state.displayName = action.payload
     },
-    changeRoomName: (state, action)=>{
-      state.roomName=action.payload
+    changeRoomName: (state, action) => {
+      state.roomName = action.payload
+    },
+    changeRoom: (state, action) => {
+      state.room = action.payload
+    },
+    changeXMPPConnected: (state, action) => {
+      state.XMPPConnected = action.payload
     }
   }
 })
 
-export const {changeRoomStatus, changeRoomName} = configSlice.actions
+export const {changeDisplayName, changeRoomName, changeRoom, changeXMPPConnected} = configSlice.actions
 export default configSlice.reducer

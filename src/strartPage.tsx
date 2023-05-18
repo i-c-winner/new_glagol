@@ -1,54 +1,21 @@
-import React, {useEffect, createRef} from "react";
-import {useNavigate} from "react-router-dom";
-import {changeRoom} from "./components/room/sliceRoom";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import {useDispatch} from "react-redux";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import React, { useState} from "react";
 import Glagol from "./App/Glagol";
+import {useSelector} from "react-redux";
+import CreatedRoom from "./components/room/CreatedRoom";
+import CreatedDisplayName from "./components/room/CreatedDisplayName";
+import Room from "./components/room/Room";
 
+Glagol.xmpp.init()
 function StartPage() {
-  const navigate = useNavigate()
-  const inputRef = createRef<any>()
-  const roomName = window.location.pathname.split('/')[1]
-
-  Glagol.xmpp.init()
-  Glagol.xmpp.initialization()
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (roomName !== "") {
-      dispatch(changeRoom(roomName))
-      navigate(`/${roomName}`)
-    }
-  }, [])
-
-  function createRoom() {
-    if (typeof inputRef.current.value === 'string') {
-      dispatch(changeRoom(inputRef.current.value))
-      navigate(`/${inputRef.current.value}`)
-    } else {
-      console.error('roomName must be string')
-    }
-  }
-
+  const [createdRoomName, setCreatedRoomName] =useState(useSelector((state: any)=>state.sliceConfig.roomName))
+  const [createdDisplayName, setDisplayName] =useState(useSelector((state: any)=>state.sliceConfig.displayName))
+  const [room, setRoom]= useState(useSelector((state: any)=>state.sliceConfig.room))
+  console.log(room)
   return (
     <div>
-      <Box
-        component="form"
-        sx={{
-          '& > :not(style)': {m: 1, width: '25ch'},
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField id="outlined-basic" label="Outlined" inputRef={inputRef} variant="outlined"/>
-      </Box>
-      <Stack spacing={2} direction="row">
-        <Button onClick={createRoom} variant="outlined">Create Room</Button>
-      </Stack>
+      {!createdRoomName? <CreatedRoom />:null}
+      {!createdDisplayName&&createdRoomName?<CreatedDisplayName/>: null}
+      {room? <Room />: null}
     </div>
   )
 }

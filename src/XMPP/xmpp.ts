@@ -51,8 +51,6 @@ class XMPP {
   }
 
   init() {
-    this.connection.addHandler(this.addHandler)
-    console.log(this.connection)
     this.connection.register.connect("@prosolen.net", this.callbackRegistry)
   }
 
@@ -86,7 +84,8 @@ class XMPP {
     } else if (status === Strophe.Status.REGIFAIL) {
       console.log("The Server does not support In-Band Registration")
     } else if (status === Strophe.Status.CONNECTED) {
-
+    this.connection.addHandler(this.addHandler)
+    console.log(this.connection)
     }
   }
 
@@ -95,7 +94,7 @@ class XMPP {
     const type = stanza.getAttribute('type');
     const elems = stanza.getElementsByTagName('body');
     const message = Strophe.getText(elems[0]);
-    console.log(message, elems, stanza)
+    console.log(stanza, 'Stanza')
     if (type === 'chat') {
       if (message === 'add_track') {
         console.log('add_track')
@@ -109,7 +108,6 @@ class XMPP {
   }
 
   createRoom(roomName: string) {
-    console.log(' createRoom')
     const message = new Strophe.Builder('presence', {
       from: `${this.connection.jid}`,
       to: `${roomName}@conference.prosolen.net/${this.connection.jid.split('/')[1]}`
