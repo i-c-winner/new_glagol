@@ -1,8 +1,10 @@
 import getRandomText from "../plugins/getRandomText";
 import {onListeners, emitListeners} from "../plugins/createListeners";
 import PeerConnection from "../WebRtc/WebRtc";
+
 const {Strophe}: any = require('strophe.js')
 const register: any = require('strophe-plugin-register')
+
 class XMPP {
   public xmpp: any;
   public conn: any;
@@ -15,7 +17,7 @@ class XMPP {
 
 
   constructor() {
-    this._listener={}
+    this._listener = {}
     this.initialized = false
     this.conn = null
     this.connection = new Strophe.Connection('https://xmpp.prosolen.net:5281/http-bind')
@@ -58,9 +60,7 @@ class XMPP {
   peerInit() {
     this.peerConnection.init()
   }
-  entranceToRoom(roomName: string){
-    console.log('enter to Room', roomName)
-  }
+
 
   initialization() {
     this.initialized = true
@@ -88,7 +88,7 @@ class XMPP {
     } else if (status === Strophe.Status.REGIFAIL) {
       console.log("The Server does not support In-Band Registration")
     } else if (status === Strophe.Status.CONNECTED) {
-    this.connection.addHandler(this.addHandler)
+      this.connection.addHandler(this.addHandler)
       this.emit('connected')
     }
   }
@@ -98,6 +98,7 @@ class XMPP {
     const type = stanza.getAttribute('type');
     const elems = stanza.getElementsByTagName('body');
     const message = Strophe.getText(elems[0]);
+    console.log(stanza)
     if (type === 'chat') {
       if (message === 'add_track') {
         console.log('add_track')
@@ -110,13 +111,36 @@ class XMPP {
     return true
   }
 
-  createRoom(roomName: string) {
+  entranceToRoom(roomName: string) {
+    console.log('enter')
+    this.createRoom(roomName, false)
+  }
+
+  createRoom(roomName: string, mustValidate: boolean) {
     console.log('createRoom')
     const message = new Strophe.Builder('presence', {
       from: `${this.connection.jid}`,
       to: `${roomName}@conference.prosolen.net/${this.connection.jid.split('/')[1]}`
     }).c('x', {
       xmlns: 'http://jabber.org/protocol/muc'
+    })
+    this.connection.send(message)
+   if (mustValidate) this.validateCreateRoom(roomName)
+  }
+
+  validateCreateRoom(roomName: string) {
+    const message = new Strophe.Builder('presence', {
+      from: `${this.connection.jid}`,
+      to: `${roomName}@conference.prosolen.net/${this.connection.jid.split('/')[1]}`
+    }).c('x', {
+      xmlns: 'http://jabber.org/protocol/muc#user'
+    }).c('item', {
+      affiliation: "owner",
+      role: "moderator"
+    }).c('status', {
+      code: '110'
+    }).c('status', {
+      code: '201'
     })
     this.connection.send(message)
   }
@@ -131,7 +155,7 @@ class XMPP {
 
     const message = new Strophe.Builder('iq', {
       to: 'conference.prosolen.net',
-      id:'zb8q41f4',
+      id: 'zb8q41f4',
       from: `${this.connection.jid}`,
       type: 'get'
     }).c('query', {

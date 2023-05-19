@@ -1,24 +1,42 @@
-import React from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {changeRoomName, changeICreaterRoom} from "../../App/sliceConfig";
+import React, {useRef} from "react";
+import {useDispatch} from "react-redux";
+import {changeHasRoomName, changeICreaterRoom, changeRoomName} from "../../App/sliceConfig";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import {useNavigate} from "react-router-dom";
 
 
 function CreatedRoom(props: any) {
-  const {XMPPConnected}=useSelector((state: any)=>state.sliceConfig)
-  const dispatch=useDispatch()
-
-  function click() {
-    dispatch(changeRoomName(true))
+  const dispatch = useDispatch()
+  const createRoomNameRef = useRef<any>()
+  const navigate: any=useNavigate()
+  function creatingRoom() {
+    console.log(createRoomNameRef.current.value)
+    dispatch(changeRoomName(createRoomNameRef.current.value))
+    dispatch(changeHasRoomName(true))
     dispatch(changeICreaterRoom(true))
+    navigate(`/${createRoomNameRef.current.value}`)
   }
+  {
+    return !props.status ? <div>
+      <Box
+        component="form"
+        sx={{
+          '& > :not(style)': {m: 1, width: '25ch'},
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField inputRef={createRoomNameRef} id="outlined-basic" label="Outlined" variant="outlined"/>
+      </Box>
+      <Stack spacing={2} direction="row">
+        <Button onClick={creatingRoom}  variant="outlined">Creating Room</Button>
+      </Stack>
 
-    {return !props.status?   <div>
-        <p>Created Room</p>
-      <p>{String(XMPPConnected)}</p>
-      <button onClick={click}></button>
-
-      </div> : null }
-
+    </div> : null
+  }
 
 
 }

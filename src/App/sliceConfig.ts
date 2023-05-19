@@ -4,9 +4,10 @@ const configSlice = createSlice({
   name: 'config',
   initialState: {
     displayName: false,
-    roomName: false,
+    roomName: '',
     XMPPConnected: false,
-    iCreaterRoom: false
+    iCreaterRoom: false,
+    hasRoomName: ''
   },
   reducers: {
     changeDisplayName: (state, action) => {
@@ -14,6 +15,9 @@ const configSlice = createSlice({
     },
     changeRoomName: (state, action) => {
       state.roomName = action.payload
+    },
+    changeHasRoomName: (state, action)=> {
+      state.hasRoomName = action.payload
     },
     changeXMPPConnected: (state, action) => {
       state.XMPPConnected = action.payload
@@ -24,5 +28,5 @@ const configSlice = createSlice({
   }
 })
 
-export const {changeDisplayName, changeRoomName, changeXMPPConnected, changeICreaterRoom} = configSlice.actions
+export const {changeDisplayName, changeRoomName, changeXMPPConnected, changeICreaterRoom, changeHasRoomName} = configSlice.actions
 export default configSlice.reducer

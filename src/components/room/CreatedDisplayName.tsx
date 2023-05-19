@@ -10,16 +10,14 @@ function CreatedDisplayName(props: any) {
   function click() {
     dispatch(changeDisplayName(true))
     if (iCreaterRoom) {
-      Glagol.xmpp.createRoom(roomName)
+      Glagol.xmpp.createRoom(roomName, true)
     } else {
-
       Glagol.xmpp.entranceToRoom(roomName)
     }
   }
 
   {
     return (props.status ? <div>
-        <p>CreatedDisplayName</p>
         <button onClick={click}>created DIsk</button>
       </div> : null
     )
