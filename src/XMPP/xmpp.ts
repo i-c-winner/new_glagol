@@ -1,4 +1,3 @@
-
 import getRandomText from "../plugins/getRandomText";
 import {onListeners, emitListeners} from "../plugins/createListeners";
 import PeerConnection from "../WebRtc/WebRtc";
@@ -12,9 +11,11 @@ class XMPP {
   private password: string;
   private userName: string;
   private initialized: boolean;
+  public _listener: {};
 
 
   constructor() {
+    this._listener={}
     this.initialized = false
     this.conn = null
     this.connection = new Strophe.Connection('https://xmpp.prosolen.net:5281/http-bind')
@@ -57,6 +58,9 @@ class XMPP {
   peerInit() {
     this.peerConnection.init()
   }
+  entranceToRoom(roomName: string){
+    console.log('enter to Room', roomName)
+  }
 
   initialization() {
     this.initialized = true
@@ -85,7 +89,7 @@ class XMPP {
       console.log("The Server does not support In-Band Registration")
     } else if (status === Strophe.Status.CONNECTED) {
     this.connection.addHandler(this.addHandler)
-    console.log(this.connection)
+      this.emit('connected')
     }
   }
 
@@ -94,7 +98,6 @@ class XMPP {
     const type = stanza.getAttribute('type');
     const elems = stanza.getElementsByTagName('body');
     const message = Strophe.getText(elems[0]);
-    console.log(stanza, 'Stanza')
     if (type === 'chat') {
       if (message === 'add_track') {
         console.log('add_track')
@@ -108,13 +111,13 @@ class XMPP {
   }
 
   createRoom(roomName: string) {
+    console.log('createRoom')
     const message = new Strophe.Builder('presence', {
       from: `${this.connection.jid}`,
       to: `${roomName}@conference.prosolen.net/${this.connection.jid.split('/')[1]}`
     }).c('x', {
       xmlns: 'http://jabber.org/protocol/muc'
     })
-    console.log(this.connection)
     this.connection.send(message)
   }
 
