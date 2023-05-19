@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Glagol from "./App/Glagol";
 import {useSelector, useDispatch} from "react-redux";
-import {changeRoomName, changeXMPPConnected} from "./App/sliceConfig";
+import {changeRoomName, changeHasRoomName, changeXMPPConnected} from "./App/sliceConfig";
 import CreatedRoom from "./components/room/CreatedRoom";
 import CreatedDisplayName from "./components/room/CreatedDisplayName";
 import Room from "./components/room/Room";
@@ -21,23 +21,22 @@ function StartPage() {
   useEffect(() => {
     const url = window.location.pathname.split('/')[1]
     if (url !== "") {
+      dispatch(changeHasRoomName(true))
       dispatch(changeRoomName(url))
     }
   }, [])
-
+  function startingRoomName() {
+    return hasRoomName && !hasDisplayName
+  }
   function startingRoom() {
     return hasRoomName && hasDisplayName
-  }
-
-  function createdRoomName() {
-    return hasRoomName && !hasDisplayName
   }
 
   return (
 
     <div>
       <CreatedRoom status={hasRoomName}/>
-      <CreatedDisplayName status={createdRoomName()}/>
+      <CreatedDisplayName status={startingRoomName()}/>
       <Room status={startingRoom()}/>
     </div>
   )
