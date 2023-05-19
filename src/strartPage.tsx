@@ -16,8 +16,8 @@ function StartPage() {
     dispatch(changeXMPPConnected(true))
   }
 
-  const roomName = useSelector((state: any) => state.sliceConfig.roomName)
-  const displayName = useSelector((state: any) => state.sliceConfig.displayName)
+  const hasRoomName = useSelector((state: any) => state.sliceConfig.hasRoomName)
+  const hasDisplayName = useSelector((state: any) => state.sliceConfig.hasDisplayName)
   useEffect(() => {
     const url = window.location.pathname.split('/')[1]
     if (url !== "") {
@@ -26,17 +26,17 @@ function StartPage() {
   }, [])
 
   function startingRoom() {
-    return roomName && displayName
+    return hasRoomName && hasDisplayName
   }
 
   function createdRoomName() {
-    return roomName && !displayName
+    return hasRoomName && !hasDisplayName
   }
 
   return (
 
     <div>
-      <CreatedRoom status={roomName}/>
+      <CreatedRoom status={hasRoomName}/>
       <CreatedDisplayName status={createdRoomName()}/>
       <Room status={startingRoom()}/>
     </div>

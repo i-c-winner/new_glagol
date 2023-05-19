@@ -1,14 +1,19 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {changeDisplayName} from "../../App/sliceConfig";
+import {changeHasDisplayName} from "../../App/sliceConfig";
 import Glagol from "../../App/Glagol";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import {useNavigate} from "react-router-dom";
 
 function CreatedDisplayName(props: any) {
   const dispatch = useDispatch()
   const {iCreaterRoom, roomName} = useSelector((state: any) => state.sliceConfig)
-
-  function click() {
-    dispatch(changeDisplayName(true))
+  // const createUserNameRef=useRef()
+  function creatingUser() {
+    dispatch(changeHasDisplayName(true))
     if (iCreaterRoom) {
       Glagol.xmpp.createRoom(roomName, true)
     } else {
@@ -18,7 +23,19 @@ function CreatedDisplayName(props: any) {
 
   {
     return (props.status ? <div>
-        <button onClick={click}>created DIsk</button>
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': {m: 1, width: '25ch'},
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField  id="outlined-basic" label="Outlined" variant="outlined"/>
+        </Box>
+        <Stack spacing={2} direction="row">
+          <Button onClick={creatingUser}  variant="outlined">Creating Room</Button>
+        </Stack>
       </div> : null
     )
   }
