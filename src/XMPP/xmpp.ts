@@ -112,12 +112,15 @@ class XMPP {
   }
 
   entranceToRoom(roomName: string) {
-    console.log('enter')
-    this.createRoom(roomName, false)
+    this.functionCreatedRoom(roomName)
   }
 
-  createRoom(roomName: string, mustValidate: boolean) {
-    console.log('createRoom')
+  createRoom(roomName: string) {
+    this.functionCreatedRoom(roomName)
+    this.validateCreateRoom(roomName)
+  }
+
+  functionCreatedRoom(roomName: string) {
     const message = new Strophe.Builder('presence', {
       from: `${this.connection.jid}`,
       to: `${roomName}@conference.prosolen.net/${this.connection.jid.split('/')[1]}`
@@ -125,7 +128,6 @@ class XMPP {
       xmlns: 'http://jabber.org/protocol/muc'
     })
     this.connection.send(message)
-   if (mustValidate) this.validateCreateRoom(roomName)
   }
 
   validateCreateRoom(roomName: string) {
@@ -146,13 +148,6 @@ class XMPP {
   }
 
   getRoom() {
-    // <iq from='hag66@shakespeare.lit/pda'
-    // id='zb8q41f4'
-    // to='chat.shakespeare.lit'
-    // type='get'>
-    // <query xmlns='http://jabber.org/protocol/disco#items'/>
-    //   </iq>
-
     const message = new Strophe.Builder('iq', {
       to: 'conference.prosolen.net',
       id: 'zb8q41f4',

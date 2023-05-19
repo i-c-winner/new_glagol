@@ -18,7 +18,7 @@ function CreatedDisplayName(props: any) {
     dispatch(changeHasDisplayName(true))
     dispatch(changeDisplayName(displayNameRef.current.value))
     if (iCreaterRoom) {
-      Glagol.xmpp.createRoom(roomName, true)
+      Glagol.xmpp.createRoom(roomName)
     } else {
       Glagol.xmpp.entranceToRoom(roomName)
     }
