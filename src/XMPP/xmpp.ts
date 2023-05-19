@@ -132,32 +132,27 @@ console.log(stanza ,'stanza')
 
   inviteFocus() {
     const message = new Strophe.Builder('message', {
-      to: `${this._room}@conference.prosolen.net`
-    }).c('x', {
-      xmlns:'http://jabber.org/protocol/muc#user'
-    }).c('invite', {
-      to: 'hecate@shakespeare.lit'
-    })
-
-    this.connection.send(message)
-  }
-  validateCreateRoom(roomName: string) {
-    // <message
-    //   from='wiccarocks@shakespeare.lit/laptop'
-    // id='hgn27af1'
-    // to='coven@chat.shakespeare.lit/firstwitch'
-    // type='chat'>
-    //   <body>I'll give thee a wind.</body>
-    // <x xmlns='http://jabber.org/protocol/muc#user' />
-    //   </message>
-
-    const message = new Strophe.Builder('message', {
       from: `${this.connection.jid}`,
       id: this.getId(),
       to: `focus@prosolen.net/focus`,
-      type: 'chat',
-    }).c('body').t('proba').up().c('x', {
+      // to: `${this._room}@conference.prosolen.net/${this.connection.jid.split('/')[1]}`,
+      type: 'chat'
+    }).c('body').t('Proba').up().c('x', {
       xmlns: 'http://jabber.org/protocol/muc#user'
+    })
+    this.connection.send(message)
+  }
+  validateCreateRoom(roomName: string) {
+    const message = new Strophe.Builder('iq', {
+      from: `${this.connection.jid}`,
+      id: this.getId(),
+      to: `${roomName}@conference.prosolen.net`,
+      type: 'set',
+    }).c('query', {
+      xmlns: 'http://jabber.org/protocol/muc#owner'
+    }).c('x', {
+      xmlns: 'jabber:x:data',
+      type: 'submit'
     })
     this.connection.send(message)
   }
