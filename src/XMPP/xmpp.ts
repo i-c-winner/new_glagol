@@ -14,9 +14,11 @@ class XMPP {
   private userName: string;
   private initialized: boolean;
   public _listener: {};
+  protected _room: string;
 
 
   constructor() {
+    this._room=''
     this._listener = {}
     this.initialized = false
     this.conn = null
@@ -89,25 +91,21 @@ class XMPP {
       console.log("The Server does not support In-Band Registration")
     } else if (status === Strophe.Status.CONNECTED) {
       this.connection.addHandler(this.addHandler)
+      this.connection.addHandler(this.addHandlerResponce, null, 'presence')
       this.emit('connected')
     }
   }
 
   addHandler = (stanza: any) => {
-    const from = stanza.getAttribute('from');
-    const type = stanza.getAttribute('type');
-    const elems = stanza.getElementsByTagName('body');
-    const message = Strophe.getText(elems[0]);
-    console.log(stanza)
-    if (type === 'chat') {
-      if (message === 'add_track') {
-        console.log('add_track')
-      } else {
-        const rtcSd = new RTCSessionDescription((JSON.parse(window.atob(message))))
-        console.log(rtcSd, 'RTCSD')
-        this.emit('setRemoteDescription', rtcSd)
-      }
-    }
+    console.log(stanza, 'message')
+    return true
+  }
+  getId = () => {
+    return this.connection.jid.split('/')[1]
+  }
+  addHandlerResponce = (stanza: any) => {
+console.log(stanza ,'stanza')
+    this.inviteFocus()
     return true
   }
 
@@ -121,8 +119,10 @@ class XMPP {
   }
 
   functionCreatedRoom(roomName: string) {
+    this._room=roomName
     const message = new Strophe.Builder('presence', {
       from: `${this.connection.jid}`,
+      id: this.getId(),
       to: `${roomName}@conference.prosolen.net/${this.connection.jid.split('/')[1]}`
     }).c('x', {
       xmlns: 'http://jabber.org/protocol/muc'
@@ -130,19 +130,34 @@ class XMPP {
     this.connection.send(message)
   }
 
-  validateCreateRoom(roomName: string) {
-    const message = new Strophe.Builder('presence', {
-      from: `${this.connection.jid}`,
-      to: `${roomName}@conference.prosolen.net/${this.connection.jid.split('/')[1]}`
+  inviteFocus() {
+    const message = new Strophe.Builder('message', {
+      to: `${this._room}@conference.prosolen.net`
     }).c('x', {
+      xmlns:'http://jabber.org/protocol/muc#user'
+    }).c('invite', {
+      to: 'hecate@shakespeare.lit'
+    })
+
+    this.connection.send(message)
+  }
+  validateCreateRoom(roomName: string) {
+    // <message
+    //   from='wiccarocks@shakespeare.lit/laptop'
+    // id='hgn27af1'
+    // to='coven@chat.shakespeare.lit/firstwitch'
+    // type='chat'>
+    //   <body>I'll give thee a wind.</body>
+    // <x xmlns='http://jabber.org/protocol/muc#user' />
+    //   </message>
+
+    const message = new Strophe.Builder('message', {
+      from: `${this.connection.jid}`,
+      id: this.getId(),
+      to: `focus@prosolen.net/focus`,
+      type: 'chat',
+    }).c('body').t('proba').up().c('x', {
       xmlns: 'http://jabber.org/protocol/muc#user'
-    }).c('item', {
-      affiliation: "owner",
-      role: "moderator"
-    }).c('status', {
-      code: '110'
-    }).c('status', {
-      code: '201'
     })
     this.connection.send(message)
   }
@@ -150,7 +165,7 @@ class XMPP {
   getRoom() {
     const message = new Strophe.Builder('iq', {
       to: 'conference.prosolen.net',
-      id: 'zb8q41f4',
+      id: this.getId(),
       from: `${this.connection.jid}`,
       type: 'get'
     }).c('query', {
