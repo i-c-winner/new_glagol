@@ -26,33 +26,7 @@ class XMPP {
     this.peerConnection = new PeerConnection()
     this.password = getRandomText(7)
     this.userName = getRandomText(5)
-    // this.xmpp.then((connection: any) => {
-    //   this.conn = connection
-    //   connection.addHandler(this.addHandler)
-    //   const callbackRegistry = (status: number) => {
-    //     if (status === Strophe.Status.REGISTER) {
-    //       // fill out the fields
-    //       connection.register.fields.username = getRandomText(5);
-    //       connection.register.fields.password = getRandomText(7);
-    //       // calling submit will continue the registration process
-    //       connection.register.submit();
-    //     } else if (status === Strophe.Status.REGISTERED) {
-    //       console.log("registered!");
-    //       // calling login will authenticate the registered JID.
-    //       connection.authenticate();
-    //     } else if (status === Strophe.Status.CONFLICT) {
-    //       console.log("Contact already existed!");
-    //     } else if (status === Strophe.Status.NOTACCEPTABLE) {
-    //       console.log("Registration form not properly filled out.")
-    //     } else if (status === Strophe.Status.REGIFAIL) {
-    //       console.log("The Server does not support In-Band Registration")
-    //     } else if (status === Strophe.Status.CONNECTED) {
-    //       this.emit('xmppConnected')
-    //       this.emit('changeXmppState')
-    //     }
-    //   }
-    //   connection.register.connect("@prosolen.net", callbackRegistry.bind(this))
-    // })
+    this.peerConnection.on('doSignaling', this.doSignaling)
   }
 
   init() {
@@ -61,15 +35,6 @@ class XMPP {
 
   peerInit() {
     this.peerConnection.init()
-  }
-
-
-  initialization() {
-    this.initialized = true
-  }
-
-  getInitialStatus() {
-    return this.initialized
   }
 
   callbackRegistry = (status: any) => {
@@ -90,21 +55,21 @@ class XMPP {
     } else if (status === Strophe.Status.REGIFAIL) {
       console.log("The Server does not support In-Band Registration")
     } else if (status === Strophe.Status.CONNECTED) {
-      this.connection.addHandler(this.addHandler)
+      this.connection.addHandler(this.addHandlerMessage, null, 'message')
       this.connection.addHandler(this.addHandlerResponce, null, 'presence')
       this.emit('connected')
     }
   }
 
-  addHandler = (stanza: any) => {
-    console.log(stanza, 'message')
+  addHandlerMessage = (stanza: any) => {
+    const type = stanza.getAttribute('type')
+    console.log(stanza, type, 'message')
     return true
   }
   getId = () => {
     return this.connection.jid.split('/')[1]
   }
   addHandlerResponce = (stanza: any) => {
-    console.log(stanza, 'stanza')
     this.inviteFocus()
     return true
   }
@@ -118,12 +83,12 @@ class XMPP {
     this.validateCreateRoom(roomName)
   }
 
-  doSignaling=(...args: [...any[]]) =>{
+  doSignaling = (...args: [...any[]]) => {
+    console.log(args[0])
     const message = new Strophe.Builder('message', {
       to: 'admin_cs@prosolen.net',
       type: 'chat'
-    }).c('body').t(args[0])
-    console.log(message)
+    }).c('body').t(args[0][0])
     this.connection.send(message)
   }
 

@@ -1,10 +1,9 @@
 import {onListeners, emitListeners} from "../plugins/createListeners";
 
 class PeerConnection {
-  private pc: RTCPeerConnection;
+  pc: RTCPeerConnection;
   private _listener: { [key: string]: [...Function[]] };
   private localDescription: any;
-  private stream: any;
 
   constructor() {
     this._listener = {}
@@ -18,25 +17,21 @@ class PeerConnection {
     this.pc.onicecandidate = (event => {
       if (event.candidate === null) {
         this.localDescription = window.btoa(JSON.stringify(this.pc.localDescription))
-        this.emit('doSignaling',this.localDescription)
+        console.log(this._listener)
+        this.emit('doSignaling', window.btoa(JSON.stringify(this.pc.localDescription)))
       }
-
     })
-    // this.streams = new Promise((resolve: any, reject: any) => {
-    //   resolve(navigator.mediaDevices.getUserMedia({video: true, audio: true}))
-    // })
-
   }
 
   init() {
     navigator.mediaDevices.getUserMedia({video: true, audio: true}).then((stream: MediaStream) => {
-      this.stream = stream
       stream.getTracks().forEach((track) => {
         this.pc.addTrack(track)
       })
-      this.pc.createOffer().then((offer)=>{
+      this.pc.createOffer().then((offer) => {
         this.pc.setLocalDescription(offer)
       })
+      return stream
     })
   }
 

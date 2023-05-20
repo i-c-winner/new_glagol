@@ -7,15 +7,14 @@ import CreatedDisplayName from "./components/room/CreatedDisplayName";
 import Room from "./components/room/Room";
 
 Glagol.xmpp.init()
-Glagol.xmpp.peerInit()
-Glagol.xmpp.peerOnListener('doSignaling', Glagol.xmpp.doSignaling)
-
+Glagol.xmpp.peerOnListener('doSignagling', Glagol.xmpp.doSignaling)
 function StartPage() {
   const dispatch = useDispatch()
   Glagol.xmpp.xmppOnListener('connected', XMPPConnected)
-
   function XMPPConnected() {
     dispatch(changeXMPPConnected(true))
+
+    Glagol.xmpp.peerInit()
   }
 
   const hasRoomName = useSelector((state: any) => state.sliceConfig.hasRoomName)
@@ -27,9 +26,11 @@ function StartPage() {
       dispatch(changeRoomName(url))
     }
   }, [])
+
   function startingRoomName() {
     return hasRoomName && !hasDisplayName
   }
+
   function startingRoom() {
     return hasRoomName && hasDisplayName
   }
