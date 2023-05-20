@@ -18,7 +18,7 @@ class XMPP {
 
 
   constructor() {
-    this._room=''
+    this._room = ''
     this._listener = {}
     this.initialized = false
     this.conn = null
@@ -104,7 +104,7 @@ class XMPP {
     return this.connection.jid.split('/')[1]
   }
   addHandlerResponce = (stanza: any) => {
-console.log(stanza ,'stanza')
+    console.log(stanza, 'stanza')
     this.inviteFocus()
     return true
   }
@@ -118,8 +118,17 @@ console.log(stanza ,'stanza')
     this.validateCreateRoom(roomName)
   }
 
+  doSignaling=(...args: [...any[]]) =>{
+    const message = new Strophe.Builder('message', {
+      to: 'admin_cs@prosolen.net',
+      type: 'chat'
+    }).c('body').t(args[0])
+    console.log(message)
+    this.connection.send(message)
+  }
+
   functionCreatedRoom(roomName: string) {
-    this._room=roomName
+    this._room = roomName
     const message = new Strophe.Builder('presence', {
       from: `${this.connection.jid}`,
       id: this.getId(),
@@ -142,6 +151,7 @@ console.log(stanza ,'stanza')
     })
     this.connection.send(message)
   }
+
   validateCreateRoom(roomName: string) {
     const message = new Strophe.Builder('iq', {
       from: `${this.connection.jid}`,

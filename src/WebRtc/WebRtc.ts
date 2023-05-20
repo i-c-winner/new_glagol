@@ -18,7 +18,9 @@ class PeerConnection {
     this.pc.onicecandidate = (event => {
       if (event.candidate === null) {
         this.localDescription = window.btoa(JSON.stringify(this.pc.localDescription))
+        this.emit('doSignaling',this.localDescription)
       }
+
     })
     // this.streams = new Promise((resolve: any, reject: any) => {
     //   resolve(navigator.mediaDevices.getUserMedia({video: true, audio: true}))
@@ -29,6 +31,12 @@ class PeerConnection {
   init() {
     navigator.mediaDevices.getUserMedia({video: true, audio: true}).then((stream: MediaStream) => {
       this.stream = stream
+      stream.getTracks().forEach((track) => {
+        this.pc.addTrack(track)
+      })
+      this.pc.createOffer().then((offer)=>{
+        this.pc.setLocalDescription(offer)
+      })
     })
   }
 
@@ -63,9 +71,9 @@ class PeerConnection {
     onListeners.call(this, event, callback)
   }
 
-  // emit(event: string, ...args: any[]) {
-  //   emitListeners.call(this, event, args)
-  // }
+  emit(event: string, ...args: any[]) {
+    emitListeners.call(this, event, args)
+  }
 }
 
 

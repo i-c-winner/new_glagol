@@ -7,6 +7,8 @@ import CreatedDisplayName from "./components/room/CreatedDisplayName";
 import Room from "./components/room/Room";
 
 Glagol.xmpp.init()
+Glagol.xmpp.peerInit()
+Glagol.xmpp.peerOnListener('doSignaling', Glagol.xmpp.doSignaling)
 
 function StartPage() {
   const dispatch = useDispatch()
