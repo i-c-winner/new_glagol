@@ -17,7 +17,6 @@ class PeerConnection {
     this.pc.onicecandidate = (event => {
       if (event.candidate === null) {
         this.localDescription = window.btoa(JSON.stringify(this.pc.localDescription))
-        console.log(this._listener)
         this.emit('doSignaling', window.btoa(JSON.stringify(this.pc.localDescription)))
       }
     })

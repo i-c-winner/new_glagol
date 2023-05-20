@@ -63,7 +63,15 @@ class XMPP {
 
   addHandlerMessage = (stanza: any) => {
     const type = stanza.getAttribute('type')
-    console.log(stanza, type, 'message')
+    const body = stanza.getElementsByTagName('body')
+    const message = Strophe.getText(body[0])
+    if (message === 'add_track') {
+      this.addVideo()
+    } else {
+      if (type === 'chat') {
+        this.setRemoteDescription(message)
+      }
+    }
     return true
   }
   getId = () => {
@@ -84,12 +92,33 @@ class XMPP {
   }
 
   doSignaling = (...args: [...any[]]) => {
-    console.log(args[0])
     const message = new Strophe.Builder('message', {
       to: 'admin_cs@prosolen.net',
       type: 'chat'
     }).c('body').t(args[0][0])
     this.connection.send(message)
+  }
+
+  setRemoteDescription(description: string) {
+    const rtcsd = new RTCSessionDescription(JSON.parse(window.atob(description)))
+    console.log("Received from remote remote Description", rtcsd)
+    try {
+      this.peerConnection.pc.setRemoteDescription(rtcsd)
+    } catch (e) {
+      alert(e)
+    }
+  }
+
+  addVideo() {
+    this.peerConnection.pc.addTransceiver('video', {'direction': 'recvonly'})
+    this.peerConnection.pc.addTransceiver('audio', {'direction': 'recvonly'})
+    this.peerConnection.pc.createOffer({'iceRestart': true}).then(offer =>
+    {
+      this.peerConnection.pc.setLocalDescription(offer)
+    })
+setTimeout(() => {
+    console.log(this.peerConnection.pc.getRemoteStreams(), 'GETREMOTER')
+}, 3000)
   }
 
   functionCreatedRoom(roomName: string) {

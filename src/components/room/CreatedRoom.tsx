@@ -13,8 +13,7 @@ function CreatedRoom(props: any) {
   const createRoomNameRef = useRef<any>()
   const navigate: any=useNavigate()
   function creatingRoom() {
-    console.log(createRoomNameRef.current.value)
-    dispatch(changeRoomName(createRoomNameRef.current.value))
+        dispatch(changeRoomName(createRoomNameRef.current.value))
     dispatch(changeHasRoomName(true))
     dispatch(changeICreaterRoom(true))
     navigate(`/${createRoomNameRef.current.value}`)

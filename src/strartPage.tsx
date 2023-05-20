@@ -11,7 +11,6 @@ Glagol.xmpp.peerOnListener('doSignagling', Glagol.xmpp.doSignaling)
 
 
 function StartPage() {
-  console.log('start')
   const dispatch = useDispatch()
 
 
@@ -25,7 +24,6 @@ function StartPage() {
       Glagol.xmpp.peerInit()
     }
 
-    console.log('effect')
     const url = window.location.pathname.split('/')[1]
     if (url !== "") {
       dispatch(changeHasRoomName(true))
