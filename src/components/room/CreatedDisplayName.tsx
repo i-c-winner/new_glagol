@@ -27,6 +27,7 @@ function CreatedDisplayName(props: any) {
 
   {
     return (props.status ? <div>
+        Введите своё имя
         <Box
           component="form"
           sx={{

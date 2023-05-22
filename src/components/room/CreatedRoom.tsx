@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import {useDispatch} from "react-redux";
 import {changeHasRoomName, changeICreaterRoom, changeRoomName} from "../../App/sliceConfig";
 import Box from '@mui/material/Box';
@@ -9,17 +9,24 @@ import {useNavigate} from "react-router-dom";
 
 
 function CreatedRoom(props: any) {
+  const [buttonIsDisabled, setButtonIsDisabled]= useState<boolean>(true)
   const dispatch = useDispatch()
   const createRoomNameRef = useRef<any>()
-  const navigate: any=useNavigate()
+  const navigate: any = useNavigate()
+
   function creatingRoom() {
-        dispatch(changeRoomName(createRoomNameRef.current.value))
+    dispatch(changeRoomName(createRoomNameRef.current.value))
     dispatch(changeHasRoomName(true))
     dispatch(changeICreaterRoom(true))
     navigate(`/${createRoomNameRef.current.value}`)
   }
+function changingRoomName() {
+  setButtonIsDisabled(false)
+}
+
   {
     return !props.status ? <div>
+      Введите название комнаты
       <Box
         component="form"
         sx={{
@@ -28,10 +35,10 @@ function CreatedRoom(props: any) {
         noValidate
         autoComplete="off"
       >
-        <TextField inputRef={createRoomNameRef} id="outlined-basic" label="Outlined" variant="outlined"/>
+        <TextField inputRef={createRoomNameRef} onChange={changingRoomName} id="outlined-basic" label="Outlined" variant="outlined"/>
       </Box>
       <Stack spacing={2} direction="row">
-        <Button onClick={creatingRoom}  variant="outlined">Creating Room</Button>
+        <Button onClick={creatingRoom} disabled={buttonIsDisabled} variant="outlined">Creating Room</Button>
       </Stack>
 
     </div> : null
