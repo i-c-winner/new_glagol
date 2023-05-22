@@ -2,10 +2,14 @@ import {onListeners, emitListeners} from "../plugins/createListeners";
 
 class PeerConnection {
   pc: RTCPeerConnection;
+  // @ts-ignore
   private _listener: { [key: string]: [...Function[]] };
+  // @ts-ignore
   private localDescription: any;
+  private localStream: undefined|MediaStream;
 
   constructor() {
+    this.localStream=undefined
     this._listener = {}
     this.pc = new RTCPeerConnection({
       iceServers: [
@@ -24,6 +28,8 @@ class PeerConnection {
 
   init() {
     navigator.mediaDevices.getUserMedia({video: true, audio: true}).then((stream: MediaStream) => {
+      this.localStream = stream
+      this.emit('setLocalStream', stream)
       stream.getTracks().forEach((track) => {
         this.pc.addTrack(track)
       })
@@ -34,33 +40,9 @@ class PeerConnection {
     })
   }
 
-  // getPeerConnection() {
-  //   return this.pc
-  // }
-  //
-  // addTracks(streams: any) {
-  //   streams[0].getTracks().forEach((stream: MediaStreamTrack) => {
-  //     this.pc.addTrack(stream)
-  //   })
-  //   this._createOffer()
-  // }
-  //
-  // _createOffer() {
-  //   const pc = this.getPeerConnection()
-  //   pc.createOffer().then((offer: any) => {
-  //     pc.setLocalDescription(offer)
-  //   })
-  // }
-  //
-  // setRemoteDescription(description: any) {
-  //   const pc = this.getPeerConnection()
-  //   try {
-  //     pc.setRemoteDescription(description)
-  //   } catch (e) {
-  //     console.log('error', e)
-  //   }
-  // }
-  //
+ getLocalStream() {
+    return this.localStream
+ }
   on(event: string, callback: Function) {
     onListeners.call(this, event, callback)
   }

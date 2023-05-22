@@ -1,17 +1,11 @@
-import React from "react";
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Glagol from "../../App/Glagol";
+import BigScreen from "../bigScreen/bigScreen";
+import {useSelector} from "react-redux";
 
 function Room(props:any) {
-  function getRooms() {
-    Glagol.xmpp.getRoom()
-  }
+  const {localStream}=useSelector((state: any)=>state.sliceRoom)
+  console.log(localStream)
   {return props.status? <div>
-    <p>Room</p>
-    <Stack spacing={2} direction="row">
-      <Button onClick={getRooms}  variant="outlined">Get rooms</Button>
-    </Stack>
+    <BigScreen localStream={localStream}/>
 
   </div>: null}
 }

@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import {useRef} from "react";
 import {useDispatch} from "react-redux";
 import {changeHasRoomName, changeICreaterRoom, changeRoomName} from "../../App/sliceConfig";
 import Box from '@mui/material/Box';

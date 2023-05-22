@@ -3,6 +3,7 @@ import {onListeners, emitListeners} from "../plugins/createListeners";
 import PeerConnection from "../WebRtc/WebRtc";
 
 const {Strophe}: any = require('strophe.js')
+//@ts-ignore
 const register: any = require('strophe-plugin-register')
 
 class XMPP {
@@ -12,7 +13,6 @@ class XMPP {
   private peerConnection: PeerConnection;
   private password: string;
   private userName: string;
-  private initialized: boolean;
   public _listener: {};
   protected _room: string;
 
@@ -20,6 +20,7 @@ class XMPP {
   constructor() {
     this._room = ''
     this._listener = {}
+    //@ts-ignore
     this.initialized = false
     this.conn = null
     this.connection = new Strophe.Connection('https://xmpp.prosolen.net:5281/http-bind')
@@ -27,6 +28,7 @@ class XMPP {
     this.password = getRandomText(7)
     this.userName = getRandomText(5)
     this.peerConnection.on('doSignaling', this.doSignaling)
+    console.log(this.connection, 'CONNECTION')
   }
 
   init() {
@@ -77,7 +79,9 @@ class XMPP {
   getId = () => {
     return this.connection.jid.split('/')[1]
   }
+ //@ts-ignore
   addHandlerResponce = (stanza: any) => {
+
     this.inviteFocus()
     return true
   }
@@ -101,7 +105,7 @@ class XMPP {
 
   setRemoteDescription(description: string) {
     const rtcsd = new RTCSessionDescription(JSON.parse(window.atob(description)))
-    console.log("Received from remote remote Description", rtcsd)
+    console.log("Received from remote remote Description")
     try {
       this.peerConnection.pc.setRemoteDescription(rtcsd)
     } catch (e) {
@@ -116,9 +120,6 @@ class XMPP {
     {
       this.peerConnection.pc.setLocalDescription(offer)
     })
-setTimeout(() => {
-    console.log(this.peerConnection.pc.getRemoteStreams(), 'GETREMOTER')
-}, 3000)
   }
 
   functionCreatedRoom(roomName: string) {
