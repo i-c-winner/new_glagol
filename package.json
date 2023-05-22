@@ -18,6 +18,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.2",
+    "redux-thunk": "^2.4.2",
     "strophe-plugin-register": "^0.0.1",
     "strophe.js": "^1.6.1"
   },
@@ -31,6 +32,7 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "sass": "^1.62.1",
     "typescript": "^5.0.2",
     "vite": "^4.3.2",
     "vite-require": "^0.2.3"

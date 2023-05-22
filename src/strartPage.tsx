@@ -25,7 +25,7 @@ function StartPage() {
     Glagol.peerAddListener('setLocalStream', setLocalStream)
     function setLocalStream(...args: [...any[]]) {
       dispatch(changeRoomSource(args[0][0]))
-      console.log(args[0])
+      console.log(args[0], 'startPage')
     }
 
     const url = window.location.pathname.split('/')[1]
