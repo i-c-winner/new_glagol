@@ -2,3 +2,14 @@
 display: flex;
   justify-content: space-between;
 }
+.input-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #efece5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
