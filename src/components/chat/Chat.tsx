@@ -19,8 +19,9 @@ function Chat() {
     maxWidth: 360,
     bgcolor: 'background.paper',
   }}
-                classes={{ root: 'chats-list' }}
-  >
+                classes={{
+                  root: 'chats-list'
+                }}>
     {chatsList.map((chat: Chat) => {
       return (<ListItem alignItems="flex-start">
           <ListItemAvatar>

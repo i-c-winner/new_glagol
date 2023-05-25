@@ -1,4 +1,6 @@
 .chats-list {
-  height: 98vh;
+  height: 100vh;
   overflow-y: scroll;
+  flex-grow: 1;
+  padding: 0 !important;
 }
