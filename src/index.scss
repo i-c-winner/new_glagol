@@ -1,2 +1,10 @@
 @import './css/index.scss';
 
+body {
+  margin: 0;
+}
+:root {
+  --dark-theme-main: #405066;
+  --dark-theme-text: #fff ;
+}
+

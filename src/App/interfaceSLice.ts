@@ -2,9 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { tollbarButtons } from "./constants";
 
 const interfaceSlice = createSlice({
-  name: 'interface', initialState: {
+  name: 'interface',
+  initialState: {
     tollbarButtons
-  }, reducers: {
+  },
+  reducers: {
     addTollbarButton: (state, action) => {
       state.tollbarButtons.push(action.payload)
     }
@@ -13,5 +15,5 @@ const interfaceSlice = createSlice({
 
 
 export const { addTollbarButton } = interfaceSlice.actions
-export default  interfaceSlice.reducer
+export default interfaceSlice.reducer
 

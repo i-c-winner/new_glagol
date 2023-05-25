@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import {useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {changeDisplayName, changeHasDisplayName} from "../../App/configSlice";
 import Glagol from "../../App/Glagol";
