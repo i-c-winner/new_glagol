@@ -1,6 +1,6 @@
 import {useRef, useState} from "react";
 import {useDispatch} from "react-redux";
-import {changeHasRoomName, changeICreaterRoom, changeRoomName} from "../../App/sliceConfig";
+import {changeHasRoomName, changeICreaterRoom, changeRoomName} from "../../App/configSlice";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';

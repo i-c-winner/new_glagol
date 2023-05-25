@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 
 function BigScreen() {
   const bigScreenRef = useRef<any>(null)
-  const {roomSource} = useSelector((state: any) => state.sliceRoom)
+  const {roomSource} = useSelector((state: any) => state.roomSlice)
   useEffect(() => {
     if (roomSource !== undefined) {
       roomSource.getTracks().forEach((track: MediaStreamTrack) => {

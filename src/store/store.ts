@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import sliceRoom from "../components/bigScreen/sliceRoom";
-import sliceConfig from "../App/sliceConfig";
+import roomSlice from "../components/bigScreen/roomSlice";
+import configSlice from "../App/configSlice";
+import interfaceSLice from "../App/interfaceSLice";
 import thunk from "redux-thunk";
 export default configureStore({
-  reducer: {sliceRoom, sliceConfig, s},
+  reducer: {roomSlice, configSlice, interfaceSLice},
   middleware: [thunk]
 })

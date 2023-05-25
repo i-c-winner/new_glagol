@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {changeDisplayName, changeHasDisplayName} from "../../App/sliceConfig";
+import {changeDisplayName, changeHasDisplayName} from "../../App/configSlice";
 import Glagol from "../../App/Glagol";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -12,7 +12,7 @@ function CreatedDisplayName(props: any) {
   const navigate=useNavigate()
   const dispatch = useDispatch()
   const displayNameRef=useRef<any>()
-  const {iCreaterRoom, roomName} = useSelector((state: any) => state.sliceConfig)
+  const {iCreaterRoom, roomName} = useSelector((state: any) => state.configSlice)
   // const createUserNameRef=useRef()
   function creatingUser() {
     dispatch(changeHasDisplayName(true))
