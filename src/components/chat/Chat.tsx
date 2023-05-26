@@ -22,19 +22,24 @@ function Chat() {
                 classes={{
                   root: 'chats-list'
                 }}>
-    {chatsList.map((chat: Chat) => {
-      return (<ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
-          </ListItemAvatar>
-          <ListItemText
-            primary={chat.author}
-            secondary={<React.Fragment>
-              {chat.text}
-            </React.Fragment>}
-          />
+    {chatsList.map((chat: Chat, index: number) => {
+      return (
+        <div key={index}>
+          <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
+            </ListItemAvatar>
+            <ListItemText
+              primary={chat.author}
+              secondary={<React.Fragment>
+                {chat.text}
+              </React.Fragment>}
+            />
+
+          </ListItem>
           <Divider variant="inset" component="li"/>
-        </ListItem>
+        </div>
+
 
       )
     })}
