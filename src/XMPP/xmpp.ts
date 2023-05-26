@@ -174,6 +174,9 @@ class XMPP {
     this.connection.send(message)
   }
 
+  getLocalStream() {
+    return this.peerConnection.getLocalStream()
+  }
   xmppOnListener(event: string, callback: Function) {
     onListeners.call(this, event, callback)
   }

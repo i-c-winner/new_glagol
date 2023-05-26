@@ -29,7 +29,7 @@ class PeerConnection {
   init() {
     navigator.mediaDevices.getUserMedia({video: true, audio: true}).then((stream: MediaStream) => {
       this.localStream = stream
-      this.emit('setLocalStream', stream)
+      this.emit('setLocalStream')
       stream.getTracks().forEach((track) => {
         this.pc.addTrack(track)
       })

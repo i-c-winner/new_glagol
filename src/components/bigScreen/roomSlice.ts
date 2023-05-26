@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const roomSlice = createSlice({
     name: 'room',
     initialState: {
-        roomSource: undefined
+        roomSource: false
     },
     reducers: {
-        changeRoomSource: function (state, action) {
-            state.roomSource = action.payload;
+        changeRoomSource: function (state) {
+            state.roomSource = true;
         }
     }
 });

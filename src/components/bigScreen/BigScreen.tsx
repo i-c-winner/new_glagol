@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import Glagol from "../../App/Glagol";
 
 // import '../../css/components/bigScreen.scss'
 
@@ -7,14 +8,15 @@ function BigScreen() {
   const bigScreenRef = useRef<any>(null)
   const { roomSource } = useSelector((state: any) => state.roomSlice)
   useEffect(() => {
-    if (roomSource !== undefined) {
-      roomSource.getTracks().forEach((track: MediaStreamTrack) => {
+    const localStream: any = Glagol.getLocalStream()
+    console.log(localStream, 'localStream')
+    if (roomSource) {
+      localStream.getTracks().forEach((track: MediaStreamTrack) => {
         if (track.kind === 'video') {
           console.log(bigScreenRef.current)
-          bigScreenRef.current.srcObject = roomSource
+          bigScreenRef.current.srcObject = localStream
         }
       })
-      // bigScreenRef.current.value.srcObjct(roomSource)
     }
   }, [ roomSource ])
 

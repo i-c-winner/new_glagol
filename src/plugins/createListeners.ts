@@ -9,7 +9,6 @@ function emitListeners(this: any, event : string, ...args : any[]) {
   if (!this._listener[event]) {
     console.error('Такая функция не установлена')
   } else {
-    debugger
     this._listener[event].forEach((listener: Function) => {
       listener(args[0])
     })
