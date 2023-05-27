@@ -10,9 +10,10 @@ function RemoteStreams() {
   const [ remoteStreams, setRemoteStreams ] = useState([])
   const dispatch = useDispatch()
   const { remoteStreamsWereUpdated } = useSelector((state: any) => state.roomSlice)
+
   useEffect(() => {
     if (remoteStreamsWereUpdated) {
-      setRemoteStreams(Glagol.getRemoteStreams())
+      setRemoteStreams(Glagol.getRemoteStreams().slice(2))
       dispatch(wasUpdateRemoteStreams(false))
     }
   }, [ remoteStreamsWereUpdated ])
