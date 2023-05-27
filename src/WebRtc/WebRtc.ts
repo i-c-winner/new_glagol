@@ -46,7 +46,7 @@ class PeerConnection {
  }
 
  setRemoteStreams() {
-    this.remoteStreams=this.getRemoteStreams()
+    this.remoteStreams=this.pc.getRemoteStreams()
  }
 
  getRemoteStreams() {

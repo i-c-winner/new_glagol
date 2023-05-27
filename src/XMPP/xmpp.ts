@@ -118,8 +118,9 @@ class XMPP {
     this.peerConnection.pc.addTransceiver('audio', { 'direction': 'recvonly' })
     this.peerConnection.pc.createOffer({ 'iceRestart': true }).then(offer => {
       this.peerConnection.pc.setLocalDescription(offer)
+      this.peerConnection.setRemoteStreams()
       setTimeout(() => {
-         this.peerConnection.setRemoteStreams()
+        this.peerConnection.setRemoteStreams()
         this.emit('updatedRemoteStreams', true)
       }, 5000)
     })
@@ -178,6 +179,10 @@ class XMPP {
 
   getLocalStream() {
     return this.peerConnection.getLocalStream()
+  }
+
+  getRemoteStreams() {
+    return this.peerConnection.getRemoteStreams()
   }
 
   xmppOnListener(event: string, callback: Function) {

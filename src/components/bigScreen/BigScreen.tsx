@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import Glagol from "../../App/Glagol";
+import RemoteStreams from "../remoteStreams/RemoteStreams";
 
 // import '../../css/components/bigScreen.scss'
 
@@ -21,6 +22,7 @@ function BigScreen() {
   return (<div>
       <div className="bigscreen">
         <video autoPlay={true} ref={bigScreenRef} className=" proba bigscreen__video"></video>
+        <RemoteStreams />
       </div>
     </div>
 

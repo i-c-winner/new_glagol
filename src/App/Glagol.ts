@@ -10,6 +10,9 @@ const Glagol = {
   },
   getLocalStream () {
     return this.xmpp.getLocalStream()
+  },
+  getRemoteStreams() {
+  return  this.xmpp.getRemoteStreams()
   }
 }
 

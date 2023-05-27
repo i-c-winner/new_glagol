@@ -3,14 +3,14 @@ const roomSlice = createSlice({
     name: 'room',
     initialState: {
         roomSource: false,
-        remoteStreamsIsUpdated: false
+        remoteStreamsWereUpdated: false
     },
     reducers: {
         changeRoomSource: function (state) {
             state.roomSource = true;
         },
-        wasUpdateRemoteStreams: function(state: any, action: any) {
-            state.remoteStreamsIsUpdated=action.payload
+        wasUpdateRemoteStreams: function(state, action) {
+            state.remoteStreamsWereUpdated=action.payload
         }
     }
 });
