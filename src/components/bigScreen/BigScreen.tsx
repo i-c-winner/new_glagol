@@ -9,11 +9,9 @@ function BigScreen() {
   const { roomSource } = useSelector((state: any) => state.roomSlice)
   useEffect(() => {
     const localStream: any = Glagol.getLocalStream()
-    console.log(localStream, 'localStream')
     if (roomSource) {
       localStream.getTracks().forEach((track: MediaStreamTrack) => {
         if (track.kind === 'video') {
-          console.log(bigScreenRef.current)
           bigScreenRef.current.srcObject = localStream
         }
       })

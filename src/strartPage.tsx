@@ -2,7 +2,7 @@ import {useEffect} from "react";
 import Glagol from "./App/Glagol";
 import {useSelector, useDispatch} from "react-redux";
 import {changeRoomName, changeHasRoomName, changeXMPPConnected} from "./App/configSlice";
-import {changeRoomSource} from "./components/bigScreen/roomSlice";
+import {changeRoomSource, wasUpdateRemoteStreams} from "./components/bigScreen/roomSlice";
 import CreatedRoom from "./components/room/CreatedRoom";
 import CreatedDisplayName from "./components/room/CreatedDisplayName";
 import Room from "./components/room/Room";
@@ -28,6 +28,12 @@ function StartPage() {
     Glagol.peerAddListener('setLocalStream', setLocalStream)
     function setLocalStream() {
       dispatch(changeRoomSource())
+    }
+
+    Glagol.xmppAddListener('updatedRemoteStreams', updatedRemoteStreams)
+
+    function updatedRemoteStreams(...args: [...[any]]) {
+      dispatch(wasUpdateRemoteStreams(args[0]))
     }
 
     const url = window.location.pathname.split('/')[1]

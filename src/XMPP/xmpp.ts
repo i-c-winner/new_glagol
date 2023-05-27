@@ -1,8 +1,8 @@
 import getRandomText from "../plugins/getRandomText";
-import {onListeners, emitListeners} from "../plugins/createListeners";
+import { onListeners, emitListeners } from "../plugins/createListeners";
 import PeerConnection from "../WebRtc/WebRtc";
 
-const {Strophe}: any = require('strophe.js')
+const { Strophe }: any = require('strophe.js')
 //@ts-ignore
 const register: any = require('strophe-plugin-register')
 
@@ -79,7 +79,7 @@ class XMPP {
   getId = () => {
     return this.connection.jid.split('/')[1]
   }
- //@ts-ignore
+  //@ts-ignore
   addHandlerResponce = (stanza: any) => {
 
     this.inviteFocus()
@@ -95,7 +95,7 @@ class XMPP {
     this.validateCreateRoom(roomName)
   }
 
-  doSignaling = (...args: [...any[]]) => {
+  doSignaling = (...args: [ ...any[] ]) => {
     const message = new Strophe.Builder('message', {
       to: 'admin_cs@prosolen.net',
       type: 'chat'
@@ -114,11 +114,14 @@ class XMPP {
   }
 
   addVideo() {
-    this.peerConnection.pc.addTransceiver('video', {'direction': 'recvonly'})
-    this.peerConnection.pc.addTransceiver('audio', {'direction': 'recvonly'})
-    this.peerConnection.pc.createOffer({'iceRestart': true}).then(offer =>
-    {
+    this.peerConnection.pc.addTransceiver('video', { 'direction': 'recvonly' })
+    this.peerConnection.pc.addTransceiver('audio', { 'direction': 'recvonly' })
+    this.peerConnection.pc.createOffer({ 'iceRestart': true }).then(offer => {
       this.peerConnection.pc.setLocalDescription(offer)
+      setTimeout(() => {
+         this.peerConnection.setRemoteStreams()
+        this.emit('updatedRemoteStreams', true)
+      }, 5000)
     })
   }
 
@@ -138,8 +141,7 @@ class XMPP {
     const message = new Strophe.Builder('message', {
       from: `${this.connection.jid}`,
       id: this.getId(),
-      to: `focus@prosolen.net/focus`,
-      // to: `${this._room}@conference.prosolen.net/${this.connection.jid.split('/')[1]}`,
+      to: `focus@prosolen.net/focus`, // to: `${this._room}@conference.prosolen.net/${this.connection.jid.split('/')[1]}`,
       type: 'chat'
     }).c('body').t('Proba').up().c('x', {
       xmlns: 'http://jabber.org/protocol/muc#user'
@@ -177,6 +179,7 @@ class XMPP {
   getLocalStream() {
     return this.peerConnection.getLocalStream()
   }
+
   xmppOnListener(event: string, callback: Function) {
     onListeners.call(this, event, callback)
   }
@@ -191,4 +194,4 @@ class XMPP {
 }
 
 
-export {XMPP}
+export { XMPP }

@@ -7,6 +7,7 @@ class PeerConnection {
   // @ts-ignore
   private localDescription: any;
   private localStream: undefined|MediaStream;
+  public remoteStreams: any;
 
   constructor() {
     this.localStream=undefined
@@ -42,6 +43,14 @@ class PeerConnection {
 
  getLocalStream() {
     return this.localStream
+ }
+
+ setRemoteStreams() {
+    this.remoteStreams=this.getRemoteStreams()
+ }
+
+ getRemoteStreams() {
+    return this.remoteStreams
  }
   on(event: string, callback: Function) {
     onListeners.call(this, event, callback)
