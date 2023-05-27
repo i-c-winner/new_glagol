@@ -1,21 +1,36 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import {wasUpdateRemoteStreams} from "../bigScreen/roomSlice";
+import { useEffect, useState } from "react";
+import { wasUpdateRemoteStreams } from "../bigScreen/roomSlice";
+import SmallScreen from "../smallScreen/SmallScreen";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 import Glagol from "../../App/Glagol";
 
 function RemoteStreams() {
+  const [ remoteStreams, setRemoteStreams ] = useState([])
   const dispatch = useDispatch()
   const { remoteStreamsWereUpdated } = useSelector((state: any) => state.roomSlice)
-  useEffect(()=>{
-    if (remoteStreamsWereUpdated){
+  useEffect(() => {
+    if (remoteStreamsWereUpdated) {
+      setRemoteStreams(Glagol.getRemoteStreams())
       dispatch(wasUpdateRemoteStreams(false))
-
-      console.log(Glagol.getRemoteStreams())
     }
-  }, [remoteStreamsWereUpdated])
-  return (
-    <div className="remote-streams">remote Streams</div>
-  )
+  }, [ remoteStreamsWereUpdated ])
+  return (<List sx={{
+      width: '100%',
+      maxWidth: 360,
+      bgcolor: 'background.paper'
+    }}
+                classes= {{
+      root: "remote-streams"
+    }}
+    >
+      {remoteStreams.map((stream: any) => {
+        return <ListItem alignItems="flex-start">
+          <SmallScreen stream={stream}/>
+        </ListItem>
+      })}
+    </List>)
 }
 
 export default RemoteStreams
