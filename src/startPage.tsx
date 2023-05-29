@@ -3,7 +3,6 @@ import Glagol from "./App/Glagol";
 import {useSelector, useDispatch} from "react-redux";
 import { changeRoomName, changeHasRoomName, changeXMPPConnected, changeICreaterRoom } from "./App/configSlice";
 import {changeRoomSource, wasUpdateRemoteStreams} from "./components/bigScreen/roomSlice";
-import CreatedRoom from "./components/room/CreatedRoom";
 import CreatedDisplayName from "./components/room/CreatedDisplayName";
 import Room from "./components/room/Room";
 import getRandomText from "./plugins/getRandomText";
@@ -60,7 +59,6 @@ function StartPage() {
   return (
 
     <div className="start-page">
-      <CreatedRoom status={hasRoomName}/>
       <CreatedDisplayName status={startingRoomName()}/>
       <Room status={startingRoom()}/>
     </div>
