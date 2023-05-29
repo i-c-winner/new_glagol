@@ -1,11 +1,13 @@
 import {useEffect} from "react";
 import Glagol from "./App/Glagol";
 import {useSelector, useDispatch} from "react-redux";
-import {changeRoomName, changeHasRoomName, changeXMPPConnected} from "./App/configSlice";
+import { changeRoomName, changeHasRoomName, changeXMPPConnected, changeICreaterRoom } from "./App/configSlice";
 import {changeRoomSource, wasUpdateRemoteStreams} from "./components/bigScreen/roomSlice";
 import CreatedRoom from "./components/room/CreatedRoom";
 import CreatedDisplayName from "./components/room/CreatedDisplayName";
 import Room from "./components/room/Room";
+import getRandomText from "./plugins/getRandomText";
+import {useNavigate} from "react-router-dom";
 
 Glagol.xmpp.init()
 Glagol.peerAddListener('doSignagling', Glagol.xmpp.doSignaling)
@@ -15,6 +17,7 @@ function StartPage() {
   const dispatch = useDispatch()
   const hasRoomName = useSelector((state: any) => state.configSlice.hasRoomName)
   const hasDisplayName = useSelector((state: any) => state.configSlice.hasDisplayName)
+  const navigate=useNavigate()
   useEffect(() => {
     Glagol.xmppAddListener('connected', XMPPConnected)
     function XMPPConnected() {
@@ -37,6 +40,12 @@ function StartPage() {
     if (url !== "") {
       dispatch(changeHasRoomName(true))
       dispatch(changeRoomName(url))
+    } else {
+      const url=getRandomText(8)
+      dispatch(changeRoomName(url))
+      dispatch(changeHasRoomName(true))
+      dispatch(changeICreaterRoom(true))
+      navigate(`/${url}`)
     }
   }, [])
 

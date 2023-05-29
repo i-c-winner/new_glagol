@@ -21,7 +21,6 @@ function CreatedRoom(props: any) {
     dispatch(changeICreaterRoom(true))
     navigate(`/${createRoomNameRef.current.value}`)
   }
-
   function changingRoomName() {
     setButtonIsDisabled(false)
   }
