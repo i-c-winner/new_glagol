@@ -26,8 +26,8 @@ function RemoteStreams() {
       root: "remote-streams"
     }}
     >
-      {remoteStreams.map((stream: any) => {
-        return <ListItem alignItems="flex-start">
+      {remoteStreams.map((stream: any, index) => {
+        return <ListItem alignItems="flex-start" key={index}>
           <SmallScreen stream={stream}/>
         </ListItem>
       })}

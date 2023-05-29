@@ -13,7 +13,6 @@ type Chat = {
 
 function Chat() {
   const { chatsList } = useSelector((state: any) => state.chatSlice)
-  console.log(chatsList)
   return (<List sx={{
     width: '100%',
     maxWidth: 360,

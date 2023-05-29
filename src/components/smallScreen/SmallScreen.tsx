@@ -7,7 +7,6 @@ import Typography from '@mui/joy/Typography';
 
 function SmallScreen(props: any) {
   const videoRef=createRef<any>()
-  console.log(props)
   useEffect(()=>{
     videoRef.current.srcObject=props.stream
   }, [])

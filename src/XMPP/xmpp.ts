@@ -28,7 +28,6 @@ class XMPP {
     this.password = getRandomText(7)
     this.userName = getRandomText(5)
     this.peerConnection.on('doSignaling', this.doSignaling)
-    console.log(this.connection, 'CONNECTION')
   }
 
   init() {

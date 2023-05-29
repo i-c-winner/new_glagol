@@ -6,7 +6,6 @@ import {changeRoomSource, wasUpdateRemoteStreams} from "./components/bigScreen/r
 import CreatedRoom from "./components/room/CreatedRoom";
 import CreatedDisplayName from "./components/room/CreatedDisplayName";
 import Room from "./components/room/Room";
-import Chat from "./components/chat/Chat";
 
 Glagol.xmpp.init()
 Glagol.peerAddListener('doSignagling', Glagol.xmpp.doSignaling)
@@ -16,8 +15,6 @@ function StartPage() {
   const dispatch = useDispatch()
   const hasRoomName = useSelector((state: any) => state.configSlice.hasRoomName)
   const hasDisplayName = useSelector((state: any) => state.configSlice.hasDisplayName)
-  const {visibleChats}=useSelector((state: any)=>state.chatSlice)
-  console.log(visibleChats)
   useEffect(() => {
     Glagol.xmppAddListener('connected', XMPPConnected)
     function XMPPConnected() {
@@ -56,7 +53,6 @@ function StartPage() {
     <div className="start-page">
       <CreatedRoom status={hasRoomName}/>
       <CreatedDisplayName status={startingRoomName()}/>
-      {visibleChats?<Chat />:null}
       <Room status={startingRoom()}/>
     </div>
   )
