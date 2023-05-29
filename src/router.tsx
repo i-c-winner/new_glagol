@@ -1,5 +1,5 @@
 import {createBrowserRouter} from "react-router-dom";
-import StartPage from "./strartPage";
+import StartPage from "./startPage";
 
 const router = createBrowserRouter([
   {

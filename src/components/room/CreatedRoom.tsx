@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { changeHasRoomName, changeICreaterRoom, changeRoomName } from "../../App/configSlice";
 import Box from '@mui/material/Box';
@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
+import getRandomText from "../../plugins/getRandomText";
 
 
 function CreatedRoom(props: any) {
@@ -24,7 +25,13 @@ function CreatedRoom(props: any) {
   function changingRoomName() {
     setButtonIsDisabled(false)
   }
-
+useEffect(()=>{
+  // const roomName=getRandomText(8)
+  // dispatch(changeRoomName(roomName))
+  // dispatch(changeHasRoomName(true))
+  // dispatch(changeICreaterRoom(true))
+  // navigate(`/${roomName}`)
+})
   {
     return !props.status ? <div className="input-form">
       <Box
@@ -44,8 +51,6 @@ function CreatedRoom(props: any) {
           <Button onClick={creatingRoom} disabled={buttonIsDisabled} variant="outlined">Creating Room</Button>
         </Stack>
       </Box>
-
-
     </div> : null
   }
 
