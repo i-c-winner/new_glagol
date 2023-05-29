@@ -2,7 +2,7 @@
 display: flex;
   justify-content: space-between;
 }
-.creat-name {
+.create-name {
   position: absolute;
   top: 0;
   left: 0;
@@ -13,8 +13,15 @@ display: flex;
   justify-content: center;
   align-items: center;
 
-  &_button {
-  background-color: green;
+  .create-name__button {
+  background-color: #1d565c;
+    white-space: nowrap;
+    color: var(--dark-theme-text);
+
+    &:hover {
+    background-color: #10f0ff;
+      color: black;
+    }
 }
 
   .video {

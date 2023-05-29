@@ -34,7 +34,7 @@ function CreatedDisplayName(props: any) {
    if (roomSource) refVideo.current.srcObject = Glagol.getLocalStream()
   }, [roomSource])
   {
-    return (props.status ? <div className="creat-name">
+    return (props.status ? <div className="create-name">
       <Stack direction="row" spacing={8}>
         <Box
           component="form"
@@ -53,9 +53,9 @@ function CreatedDisplayName(props: any) {
           noValidate
           autoComplete="off"
         >
-          <TextField inputRef={displayNameRef} id="outlined-basic" label="Outlined" variant="outlined"/>
+          <TextField inputRef={displayNameRef} id="outlined-basic" label="Имя" variant="outlined"/>
           <Button classes={{
-            text: 'creat-name__button'
+            text: 'create-name__button'
           }} onClick={creatingUser} variant="text">Присоедениться ко встрече</Button>
         </Box>
         <video className="video" autoPlay={true} ref={refVideo}></video>
