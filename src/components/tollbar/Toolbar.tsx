@@ -1,18 +1,27 @@
 import { useSelector } from "react-redux";
 import Stack from '@mui/material/Stack';
 import AbstractButton from "../UI/button/AbstractButton";
+import {IconChat} from "../icons";
+import AbstractIconButton from "../UI/button/AbstractIconButton";
+
+
+
 
 function Toolbar() {
-  const { tollbarButtons } = useSelector((state: any) => state.interfaceSLice)
-
+  const { tollbarButtonsCenter, tollBarButtonsLeft } = useSelector((state: any) => state.interfaceSLice)
   return (<div className="tollbar">
     <Stack spacing={2} direction="row">
-      {tollbarButtons.map((button: string)=>{
-        return  <AbstractButton  key={button} variant="contained" text={button}/>
+      {tollBarButtonsLeft.map((button: string) => {
+        return <AbstractIconButton icon={IconChat} button={button} />
+      })}
+    </Stack>
+    <Stack spacing={2} direction="row">
+      {tollbarButtonsCenter.map((button: string) => {
+        return <AbstractButton key={button} variant="contained" text={button}/>
       })}
     </Stack>
 
-    </div>)
+  </div>)
 }
 
 export default Toolbar;

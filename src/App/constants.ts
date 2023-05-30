@@ -1,3 +1,4 @@
-const tollbarButtons = [ "chat", "settings", "hangup" ]
+const tollbarButtonsCenter = [ "settings", "hangup" ]
+const tollBarButtonsLeft= ['chat', 'risehand']
 
-export { tollbarButtons }
+export { tollbarButtonsCenter, tollBarButtonsLeft }
