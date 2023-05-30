@@ -1,8 +1,8 @@
 import { changeVisibleChats } from "../../chat/chatSlice";
-function clickButton(this: any, button: any) {
-  switch (button.target.textContent) {
+function clickButton(dispatch: any, buttonName: any) {
+  switch (buttonName) {
     case 'chat':
-      this.dispatch(changeVisibleChats())
+      dispatch(changeVisibleChats())
       break
     case 'settings':
       console.log('settings')
