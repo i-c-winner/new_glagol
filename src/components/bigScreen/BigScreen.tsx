@@ -9,16 +9,17 @@ function BigScreen() {
   const bigScreenRef = useRef<any>(null)
   const { roomSource } = useSelector((state: any) => state.roomSlice)
   const {visibleChats}=useSelector((state: any)=>state.chatSlice)
-  useEffect(() => {
+   useEffect(() => {
     const localStream: any = Glagol.getLocalStream()
-    if (roomSource) {
+
+    if (bigScreenRef.current!==null) {
       localStream.getTracks().forEach((track: MediaStreamTrack) => {
         if (track.kind === 'video') {
           bigScreenRef.current.srcObject = localStream
         }
       })
     }
-  }, [ roomSource ])
+   }, [ roomSource ])
 
   return (<div>
       <div className="bigscreen">
@@ -32,3 +33,4 @@ function BigScreen() {
 }
 
 export default BigScreen;
+``

@@ -56,9 +56,9 @@ function CreatedDisplayName(props: any) {
           <TextField inputRef={displayNameRef} id="outlined-basic" label="Имя" variant="outlined"/>
           <Button classes={{
             text: 'create-name__button'
-          }} onClick={creatingUser} variant="text">Присоедениться ко встрече</Button>
+          }} onClick={creatingUser} variant="text" disabled={!roomSource}>Присоедениться ко встрече</Button>
         </Box>
-        <video className="video" autoPlay={true} ref={refVideo}></video>
+        <video className="video" autoPlay={true} ref={refVideo} ></video>
       </Stack>
 
 
