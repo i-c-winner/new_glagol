@@ -1,6 +1,6 @@
 const tollbarButtonsCenter = [ {
-  name: "microfon",
-  icon: "IconMicrofon"
+  name: "microphone",
+  icon: "IconMicrophone"
 }, {
   name: "camera",
   icon: "IconCamera"
