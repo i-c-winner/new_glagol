@@ -1,4 +1,23 @@
-const tollbarButtonsCenter = [ {name: "settings", icon: "IconSettings"}, {name: "hangup", icon: "IconHangUp"} ]
-const tollBarButtonsLeft= [{name: "chat", icon: "IconChat"}, {name: "risehand", icon: "IconRiseHand"}]
+const tollbarButtonsCenter = [ {
+  name: "microfon",
+  icon: "IconMicrofon"
+}, {
+  name: "camera",
+  icon: "IconCamera"
+}, {
+  name: "titleView",
+  icon: "IconTitleView"
+} ]
+const tollbarButtonsLeft = [ {
+  name: "chat",
+  icon: "IconChat"
+}, {
+  name: "risehand",
+  icon: "IconRiseHand"
+} ]
+const tollbarButtonsRight = [ {
+  name: "",
+  icon: ""
+} ]
 
-export { tollbarButtonsCenter, tollBarButtonsLeft }
+export { tollbarButtonsCenter, tollbarButtonsLeft , tollbarButtonsRight}

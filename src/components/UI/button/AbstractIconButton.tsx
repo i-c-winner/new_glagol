@@ -7,8 +7,8 @@ import clickButton from "../../tollbar/function/clickButton";
 interface Props {
   button: string
   icon: string,
-  height: string,
-  width: string,
+  height?: string,
+  width?: string,
 }
 
 interface Icons {
@@ -31,7 +31,8 @@ function AbstractIconButton(props: Props) {
   return <Button onClick={action}>
       <SvgIcon sx={{
         width,
-        height
+        height,
+        color: "#fff"
       }} viewBox={`0 0 ${width} ${height}`} children={Icons[props.icon as keyof typeof Icons]}></SvgIcon>
     </Button>
 }
