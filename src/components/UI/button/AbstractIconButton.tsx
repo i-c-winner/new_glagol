@@ -10,9 +10,9 @@ interface Props {
   icon: string,
   height?: string,
   width?: string,
-  color: {
-    isToggled: string,
-    isNotToggled: string
+  color?: {
+    isToggled?: string,
+    isNotToggled?: string
   }
 }
 
@@ -52,7 +52,7 @@ function AbstractIconButton(props: Props) {
     <SvgIcon sx={{
       width,
       height,
-      color: `${!isToggled ? props.color.isNotToggled: props.color.isToggled}`
+      color: `${!isToggled ? props.color?.isNotToggled||"white": props.color?.isToggled||"white"}`
     }} viewBox={`0 0 ${width} ${height}`} children={Icons[props.icon as keyof typeof Icons]}></SvgIcon>
   </Button>
 }

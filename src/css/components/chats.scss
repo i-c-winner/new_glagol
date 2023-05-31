@@ -1,12 +1,42 @@
 .bigscreen {
   .chats-list {
     position: absolute;
-    top: 10px;
-    bottom: 100px;
-    left: 15px;
+    top: 0;
+    bottom: 0;
+    left: 0;
     overflow-y: scroll;
     padding: 0;
     z-index: 11;
+  }
+}
+.chats {
+  position: absolute;
+  top: 10px;
+  bottom: 100px;
+  left: 15px;
+  width: 350px;
+  .chat-message {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 3px;
+    box-shadow: 0 0 3px var(--dark-theme-green);
+    background-color: var(--dark-theme-bgfield);
+    display: flex;
+    justify-content: space-between;
+    .send__icon{
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+     &:hover {
+      color: #00ff85;
+       cursor: pointer;
+     }
+    }
   }
 }
 

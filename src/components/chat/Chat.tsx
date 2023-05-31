@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
@@ -14,18 +13,17 @@ type Chat = {
 
 function Chat() {
   const { chatsList } = useSelector((state: any) => state.chatSlice)
-  return (<List sx={{
-    width: '100%',
-    maxWidth: 360,
-    bgcolor: 'background.paper',
-  }}
-                classes={{
-                  root: 'chats-list'
-                }}>
-    {chatsList.map((chat: Chat, index: number) => {
-      return (
-          <ListItem key={index} alignItems="flex-start">
-
+  return (<div className="chats">
+    <List sx={{
+      width: '100%',
+      maxWidth: 360,
+      bgcolor: 'background.paper',
+    }}
+          classes={{
+            root: 'chats-list'
+          }}>
+      {chatsList.map((chat: Chat, index: number) => {
+        return (<ListItem key={index} alignItems="flex-start">
             <ListItemAvatar>
               <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
             </ListItemAvatar>
@@ -36,12 +34,12 @@ function Chat() {
               </React.Fragment>}
             />
           </ListItem>
-          // <Divider variant="inset" component="li"/>
 
-      )
-    })}
-    <ChatsMessage />
-  </List>)
+        )
+      })}
+    </List>
+    <ChatsMessage/>
+  </div>)
 }
 
 export default Chat
