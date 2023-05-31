@@ -2,6 +2,7 @@ import { TextareaAutosize } from "@mui/material";
 import styled from "@emotion/styled";
 import SvgIcon from "@mui/material/SvgIcon";
 import { IconSend } from "../icons";
+import Button from "@mui/material/Button";
 
 
   function ChatsMessage () {
@@ -16,9 +17,16 @@ border-radius: 5px
 })
 return <div className="chat-message">
   <TextArea />
-  <div className="send__icon">
+  <Button sx={{
+    color: "white",
+    "&:hover": {
+      color: "#00ff85",
+      cursor: "pointer"
+    }
+  }}
+          className="send__icon">
     <SvgIcon children={IconSend}/>
-  </div>
+  </Button>
 </div>
 
 

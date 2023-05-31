@@ -29,13 +29,13 @@
     display: flex;
     justify-content: space-between;
     .send__icon{
-      margin-left: 10px;
-      display: flex;
-      align-items: center;
-     &:hover {
-      color: #00ff85;
-       cursor: pointer;
-     }
+     // margin-left: 10px;
+     // display: flex;
+     // align-items: center;
+     //&:hover {
+     // color: #00ff85;
+     //  cursor: pointer;
+     //}
     }
   }
 }
