@@ -1,23 +1,49 @@
 const tollbarButtonsCenter = [ {
   name: "microphone",
-  icon: "IconMicrophone"
+  icon: "IconMicrophone",
+  color: {
+    isToggled: "#ec4939" ,
+    isNotToggled: "#00ff85"
+  }
 }, {
   name: "camera",
-  icon: "IconCamera"
-}, {
+  icon: "IconCamera",
+  color: {
+    isToggled: "#ec4939" ,
+    isNotToggled: "#00ff85"
+  }
+},
+  {
   name: "titleView",
-  icon: "IconTitleView"
+  icon: "IconTitleView",
+  color: {
+    isToggled: "white",
+    isNotToggled: "white"
+  }
 } ]
 const tollbarButtonsLeft = [ {
   name: "chat",
-  icon: "IconChat"
-}, {
+  icon: "IconChat",
+  color: {
+    isToggled: "white",
+    isNotToggled: "white"
+  }
+},
+  {
   name: "risehand",
-  icon: "IconRiseHand"
+  icon: "IconRiseHand",
+    color: {
+      isToggled: "white",
+      isNotToggled: "white"
+    }
 } ]
 const tollbarButtonsRight = [ {
   name: "",
-  icon: ""
+  icon: "",
+  color: {
+    isToggled: "white",
+    isNotToggled: "white"
+  }
 } ]
 
 export { tollbarButtonsCenter, tollbarButtonsLeft , tollbarButtonsRight}
