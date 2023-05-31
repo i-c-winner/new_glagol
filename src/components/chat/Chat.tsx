@@ -6,6 +6,7 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
+import ChatsMessage from "./ChatsMessage";
 
 type Chat = {
   author: string, text: string
@@ -23,8 +24,8 @@ function Chat() {
                 }}>
     {chatsList.map((chat: Chat, index: number) => {
       return (
-        <div key={index}>
-          <ListItem alignItems="flex-start">
+          <ListItem key={index} alignItems="flex-start">
+
             <ListItemAvatar>
               <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
             </ListItemAvatar>
@@ -34,14 +35,12 @@ function Chat() {
                 {chat.text}
               </React.Fragment>}
             />
-
           </ListItem>
-          <Divider variant="inset" component="li"/>
-        </div>
-
+          // <Divider variant="inset" component="li"/>
 
       )
     })}
+    <ChatsMessage />
   </List>)
 }
 

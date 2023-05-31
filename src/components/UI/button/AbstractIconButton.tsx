@@ -28,8 +28,8 @@ interface Icons {
 function AbstractIconButton(props: Props) {
   const [ isToggled, setIsToggled ] = useState<boolean>(false)
   const {
-          width  = "35px",
-          height = "35px"
+          width  = "35",
+          height = "35"
         } = props
 
   const dispatch = useDispatch()
