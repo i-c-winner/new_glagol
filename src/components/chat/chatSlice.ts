@@ -38,6 +38,6 @@ const chatSlice = createSlice({
   }
 })
 
-export const { addChatSlice, changeVisibleChats } = chatSlice.actions
+export const { addChatStrophe, changeVisibleChats } = chatSlice.actions
 
 export default chatSlice.reducer
