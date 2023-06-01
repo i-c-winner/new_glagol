@@ -114,6 +114,7 @@ class XMPP {
 
   addVideo() {
     this.peerConnection.pc.addTransceiver('video', { 'direction': 'recvonly' })
+    console.log()
     this.peerConnection.pc.addTransceiver('audio', { 'direction': 'recvonly' })
     this.peerConnection.pc.createOffer({ 'iceRestart': true }).then(offer => {
       this.peerConnection.pc.setLocalDescription(offer)
@@ -187,7 +188,12 @@ class XMPP {
   xmppOnListener(event: string, callback: Function) {
     onListeners.call(this, event, callback)
   }
-
+  stopVideo() {
+    return this.peerConnection.stopVideo()
+  }
+startVideo() {
+    return this.peerConnection.startVideo()
+}
   peerOnListener(event: string, callback: Function) {
     this.peerConnection.on(event, callback)
   }

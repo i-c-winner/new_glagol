@@ -1,6 +1,9 @@
 import { useSelector } from "react-redux";
 import Stack from '@mui/material/Stack';
 import AbstractIconButton from "../UI/button/AbstractIconButton";
+import Button from "@mui/material/Button";
+import Glagol from "../../App/Glagol";
+
 
 
 type Button = {
@@ -8,6 +11,12 @@ type Button = {
 }
 
 function Toolbar() {
+  function stop() {
+    Glagol.stopVideo()
+  }
+  function start() {
+    Glagol.startVideo()
+  }
   const {
           tollbarButtonsCenter,
           tollbarButtonsLeft,
@@ -29,7 +38,8 @@ function Toolbar() {
         return <AbstractIconButton key={button.name} color={button.color} icon={button.icon} button={button.name}/>
       })}
     </Stack>
-
+<Button onClick={stop}>Stop</Button>
+<Button onClick={start}>Stop</Button>
   </div>)
 }
 

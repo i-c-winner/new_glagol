@@ -13,6 +13,12 @@ const Glagol = {
   },
   getRemoteStreams() {
   return  this.xmpp.getRemoteStreams()
+  },
+  stopVideo() {
+    return this.xmpp.stopVideo()
+  },
+  startVideo() {
+    return this.xmpp.startVideo()
   }
 }
 
