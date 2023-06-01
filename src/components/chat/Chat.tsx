@@ -34,7 +34,8 @@ function Chat() {
     <List sx={{
       width: '100%',
       maxWidth: 360,
-      bgcolor: 'background.paper',
+      bgcolor: 'rgba(6,6,6,.16)',
+
     }}
           classes={{
             root: 'chats-list'
