@@ -7,12 +7,14 @@ import ListItem from '@mui/material/ListItem';
 import Glagol from "../../App/Glagol";
 
 function RemoteStreams() {
+  console.log('renmoteStrreams')
   const [ remoteStreams, setRemoteStreams ] = useState([])
   const dispatch = useDispatch()
   const { remoteStreamsWereUpdated } = useSelector((state: any) => state.roomSlice)
 
   useEffect(() => {
     if (remoteStreamsWereUpdated) {
+      console.log(Glagol.getRemoteStreams().slice(2))
       setRemoteStreams(Glagol.getRemoteStreams().slice(2))
       dispatch(wasUpdateRemoteStreams(false))
     }

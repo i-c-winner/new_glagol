@@ -49,26 +49,39 @@ class PeerConnection {
   }
 
   setRemoteStreams() {
+    //@ts-ignore
     this.remoteStreams = this.pc.getRemoteStreams()
   }
 
   stopVideo() {
     this.getLocalStream()?.getTracks().map((track) => {
       if (track.kind === 'video') {
-        this.getLocalStream()?.removeTrack(track)
-        const videoTranceive=this.pc.getTransceivers()[1]
-        videoTranceive.direction="inactive"
+        track.enabled=false
+      }
+    })
+  }
+  stopAudio() {
+    this.getLocalStream()?.getTracks().map((track) => {
+      if (track.kind === 'audio') {
+        track.enabled=false
       }
     })
   }
 
   startVideo() {
-    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
-      stream.getTracks().forEach((track) => {
-        this.getLocalStream()?.addTrack(track)
-        console.log(this.getLocalStream())
-      })
+    this.getLocalStream()?.getTracks().map((track) => {
+      if (track.kind === 'video') {
+        track.enabled=true
+      }
+    })
+  }
 
+  startAudio() {
+    this.getLocalStream()?.getTracks().map((track) => {
+      if (track.kind === 'audio') {
+        console.log(track)
+        track.enabled=true
+      }
     })
   }
 

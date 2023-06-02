@@ -104,6 +104,7 @@ class XMPP {
 
   setRemoteDescription(description: string) {
     const rtcsd = new RTCSessionDescription(JSON.parse(window.atob(description)))
+    this.peerConnection.remoteStreams=rtcsd
     console.log("Received from remote remote Description")
     try {
       this.peerConnection.pc.setRemoteDescription(rtcsd)
@@ -118,7 +119,6 @@ class XMPP {
     this.peerConnection.pc.addTransceiver('audio', { 'direction': 'recvonly' })
     this.peerConnection.pc.createOffer({ 'iceRestart': true }).then(offer => {
       this.peerConnection.pc.setLocalDescription(offer)
-      this.peerConnection.setRemoteStreams()
       setTimeout(() => {
         this.peerConnection.setRemoteStreams()
         this.emit('updatedRemoteStreams', true)
