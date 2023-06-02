@@ -11,7 +11,7 @@ class PeerConnection {
 
   constructor() {
     this.startVideo = this.startVideo.bind(this)
-    this.stopVideo = this.stopVideo.bind(this)
+    this.changeVisibleVideo = this.changeVisibleVideo.bind(this)
     this.localStream = undefined
     this._listener = {}
     this.pc = new RTCPeerConnection({
@@ -53,10 +53,10 @@ class PeerConnection {
     this.remoteStreams = this.pc.getRemoteStreams()
   }
 
-  stopVideo() {
+  changeVisibleVideo() {
     this.getLocalStream()?.getTracks().map((track) => {
       if (track.kind === 'video') {
-        track.enabled=false
+        track.enabled=!track.enabled
       }
     })
   }

@@ -1,3 +1,12 @@
+const tollbarButtonsLeft = [ {
+  name: "chat",
+  icon: "IconChat",
+},
+  {
+    name: "risehand",
+    icon: "IconRiseHand",
+  } ]
+
 const tollbarButtonsCenter = [ {
   name: "microphone",
   icon: "IconMicrophone",
@@ -17,14 +26,7 @@ const tollbarButtonsCenter = [ {
   name: "titleView",
   icon: "IconTitleView",
 } ]
-const tollbarButtonsLeft = [ {
-  name: "chat",
-  icon: "IconChat",
-},
-  {
-  name: "risehand",
-  icon: "IconRiseHand",
-} ]
+
 const tollbarButtonsRight = [ {
   name: "",
   icon: "",

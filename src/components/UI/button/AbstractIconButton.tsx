@@ -2,10 +2,10 @@ import { useState } from "react";
 import SvgIcon from "@mui/material/SvgIcon";
 import * as Icons from '../../icons'
 import Button from "@mui/material/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import clickButton from "../../tollbar/function/clickButton";
 
-interface Props {
+declare interface Props {
   button: string
   icon: string,
   height?: string,
@@ -26,19 +26,24 @@ interface Icons {
 
 
 function AbstractIconButton(props: Props) {
+  const state=useSelector((state: any)=>state)
   const [ isToggled, setIsToggled ] = useState<boolean>(false)
   const {
           width  = "35",
-          height = "35"
+          height = "35",
+    button
         } = props
 
   const dispatch = useDispatch()
 
   function action() {
-    clickButton(dispatch, props.button)
+    clickButton({
+      dispatch,
+      button,
+      state
+    })
     setIsToggled(!isToggled)
   }
-
 
   return <Button
     sx={{

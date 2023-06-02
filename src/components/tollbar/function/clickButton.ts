@@ -1,11 +1,24 @@
 import { changeVisibleChats } from "../../chat/chatSlice";
-function clickButton(dispatch: any, buttonName: any) {
-  switch (buttonName) {
-    case 'chat':
-      dispatch(changeVisibleChats())
+import {changeAudioEnabled, changeVideoEnabled} from "../../../App/configSlice";
+import Glagol from "../../../App/Glagol";
+
+type Params= {
+  dispatch: Function,
+  button: string,
+  state?: any
+}
+function clickButton(params: Params) {
+
+  switch (params.button) {
+    case "chat":
+      params.dispatch(changeVisibleChats())
       break
-    case 'settings':
+    case "settings":
       console.log('settings')
+      break
+    case "camera":
+      params.dispatch(changeVideoEnabled())
+      Glagol.changeVisibleVideo()
       break
     default:
       console.log(' default')

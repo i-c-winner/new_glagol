@@ -14,8 +14,8 @@ const Glagol = {
   getRemoteStreams() {
   return  this.xmpp.getRemoteStreams()
   },
-  stopVideo() {
-    return this.xmpp.stopVideo()
+  changeVisibleVideo() {
+    return this.xmpp.changeVisibleVideo()
   },
   startVideo() {
     return this.xmpp.startVideo()
