@@ -42,15 +42,24 @@ function Toolbar() {
     console.log(button.key, tollbarButtonsCenter)
     return tollbarButtonsCenter.includes(button.key)
   })
+  const rightButtons = buttons.filter((button) => {
+    console.log(button.key, tollbarButtonsCenter)
+    return tollbarButtonsCenter.includes(button.key)
+  })
   console.log(leftButtons)
   return (<div className="tollbar">
-    <Stack spacing={2} direction="row" sx={{flexGrow: "1"}}>
+    <Stack spacing={2} direction="row" sx={{flexGrow: "1", width: "33%", justifyContent: "left"}}>
       {leftButtons.map((button) => {
         return <AbstractIconButton key={button.key}>{button.component}</AbstractIconButton>
       })}
     </Stack>
-    <Stack spacing={2} direction="row" sx={{flexGrow: "1"}}>
+    <Stack spacing={2} direction="row" sx={{flexGrow: "1", width: "33%", justifyContent: "center"}}>
       {centerButtons.map((button) => {
+        return <AbstractIconButton key={button.key}>{button.component}</AbstractIconButton>
+      })}
+    </Stack>
+    <Stack spacing={2} direction="row" sx={{flexGrow: "1", width: "33%", justifyContent: "right"}}>
+      {rightButtons.map((button) => {
         return <AbstractIconButton key={button.key}>{button.component}</AbstractIconButton>
       })}
     </Stack>
