@@ -5,6 +5,7 @@ import CameraButton from "../buttons/CameraButton";
 import MicrophoneButton from "../buttons/MicrophoneButton";
 import ChatButton from "../buttons/ChatButton";
 import TitleButton from "../buttons/TitleButton";
+import RiseHandButton from "../buttons/RiseHandButton";
 
 
 
@@ -23,6 +24,10 @@ function Toolbar() {
     {
       key: "titleView",
       component: <TitleButton/>
+    },
+    {
+      key: "riseHand",
+      component: <RiseHandButton/>
     }]
   const {
           tollbarButtonsCenter,
