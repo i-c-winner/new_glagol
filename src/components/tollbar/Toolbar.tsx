@@ -4,6 +4,7 @@ import AbstractIconButton from "../UI/button/AbstractIconButton";
 import CameraButton from "../buttons/CameraButton";
 import MicrophoneButton from "../buttons/MicrophoneButton";
 import ChatButton from "../buttons/ChatButton";
+import TitleButton from "../buttons/TitleButton";
 
 
 
@@ -18,6 +19,10 @@ function Toolbar() {
     },{
     key: "chat",
       component: <ChatButton />
+    },
+    {
+      key: "titleView",
+      component: <TitleButton/>
     }]
   const {
           tollbarButtonsCenter,
