@@ -4,6 +4,7 @@ import { changeVideoEnabled } from "../../App/configSlice";
 import SvgIcon from "@mui/material/SvgIcon";
 import camera from "../icons/Camera";
 import Button from "@mui/material/Button";
+import Glagol from "../../App/Glagol";
 
 
 function CameraButton() {
@@ -35,6 +36,7 @@ function CameraButton() {
   function click() {
     dispatch(changeVideoEnabled())
     setToggled(!toggled)
+    Glagol.changeVisibleVideo()
   }
 
   return <Button onClick={click} sx={{ padding: "0" }}>
