@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeVideoEnabled } from "../../App/configSlice";
-import SvgIcon from "@mui/material/SvgIcon";
-import camera from "../icons/Camera";
+import SvgIcon from "@mui/material/SvgIcon"
 import Button from "@mui/material/Button";
 import Glagol from "../../App/Glagol";
+import { IconCamera } from "../icons";
 
 
 function CameraButton() {
@@ -43,7 +43,7 @@ function CameraButton() {
     <SvgIcon
       viewBox="0 0 35 35"
       sx={getParams()}
-      children={camera}/>
+      children={IconCamera}/>
   </Button>
 }
 
