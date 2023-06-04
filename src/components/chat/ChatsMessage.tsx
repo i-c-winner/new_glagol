@@ -5,7 +5,7 @@ import SvgIcon from "@mui/material/SvgIcon";
 import { IconSend } from "../icons";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { addChatStrophe } from "./chatSlice";
+import { addChatStrophe } from "./ChatSlice";
 
 
 function ChatsMessage() {

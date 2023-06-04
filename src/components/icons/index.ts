@@ -1,4 +1,4 @@
-export { default as IconChat } from './iconChat'
+export { default as IconChat } from './Chat'
 export { default as IconRiseHand } from './riseHand'
 export {default as IconMicrophone} from './Microfon'
 export {default as IconCamera} from './Camera'

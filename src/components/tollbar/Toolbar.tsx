@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 import Stack from '@mui/material/Stack';
 import AbstractIconButton from "../UI/button/AbstractIconButton";
-import CameraButton from "./CameraButton";
-import MicrophoneButton from "./MicrophoneButton";
+import CameraButton from "../buttons/CameraButton";
+import MicrophoneButton from "../buttons/MicrophoneButton";
+import ChatButton from "../buttons/ChatButton";
 
 
 
@@ -14,6 +15,9 @@ function Toolbar() {
     {
       key: "microphone",
       component: <MicrophoneButton />
+    },{
+    key: "chat",
+      component: <ChatButton />
     }]
   const {
           tollbarButtonsCenter,
