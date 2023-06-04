@@ -1,35 +1,7 @@
-const tollbarButtonsLeft = [ {
-  name: "chat",
-  icon: "IconChat",
-},
-  {
-    name: "risehand",
-    icon: "IconRiseHand",
-  } ]
+const tollbarButtonsLeft = ["chat", "riseHand"]
 
-const tollbarButtonsCenter = [ {
-  name: "microphone",
-  icon: "IconMicrophone",
-  color: {
-    isToggled: "#ec4939" ,
-    isNotToggled: "#00ff85"
-  }
-}, {
-  name: "camera",
-  icon: "IconCamera",
-  color: {
-    isToggled: "#ec4939" ,
-    isNotToggled: "#00ff85"
-  }
-},
-  {
-  name: "titleView",
-  icon: "IconTitleView",
-} ]
+const tollbarButtonsCenter = [ "microphone", "camera", "titleView"]
 
-const tollbarButtonsRight = [ {
-  name: "",
-  icon: "",
-} ]
+const tollbarButtonsRight = []
 
 export { tollbarButtonsCenter, tollbarButtonsLeft , tollbarButtonsRight}
