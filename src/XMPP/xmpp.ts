@@ -191,8 +191,8 @@ class XMPP {
   changeVisibleVideo() {
     return this.peerConnection.changeVisibleVideo()
   }
-startVideo() {
-    return this.peerConnection.startVideo()
+stopVideo() {
+    return this.peerConnection.stopVideo()
 }
   peerOnListener(event: string, callback: Function) {
     this.peerConnection.on(event, callback)

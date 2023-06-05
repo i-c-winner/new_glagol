@@ -31,15 +31,12 @@ function Toolbar() {
           tollbarButtonsRight
         } = useSelector((state: any) => state.interfaceSLice)
   const leftButtons = buttons.filter((button) => {
-    console.log(button.key, tollbarButtonsLeft)
     return tollbarButtonsLeft.includes(button.key)
   })
   const centerButtons = buttons.filter((button) => {
-    console.log(button.key, tollbarButtonsCenter)
     return tollbarButtonsCenter.includes(button.key)
   })
   const rightButtons = buttons.filter((button) => {
-    console.log(button.key, tollbarButtonsRight)
     return tollbarButtonsRight.includes(button.key)
   })
 

@@ -60,11 +60,10 @@ class PeerConnection {
       }
     })
   }
-  stopAudio() {
+  stopVideo() {
     this.getLocalStream()?.getTracks().map((track) => {
-      if (track.kind === 'audio') {
-        track.enabled=false
-      }
+      console.log(track)
+    track.stop()
     })
   }
 

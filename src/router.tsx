@@ -1,5 +1,6 @@
 import {createBrowserRouter} from "react-router-dom";
 import StartPage from "./startPage";
+import ExitPage from "./components/ExitPage";
 
 const router = createBrowserRouter([
   {
@@ -10,5 +11,9 @@ const router = createBrowserRouter([
     path: '/:roomName',
     element: <StartPage />,
   },
+  {
+    path: '/exitPage',
+    element: <ExitPage />
+  }
 ])
 export default router

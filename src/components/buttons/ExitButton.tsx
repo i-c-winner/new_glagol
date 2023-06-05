@@ -1,45 +1,31 @@
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { changeVideoEnabled } from "../../App/configSlice";
+import {useNavigate} from "react-router-dom";
 import SvgIcon from "@mui/material/SvgIcon"
 import Button from "@mui/material/Button";
-import Glagol from "../../App/Glagol";
 import { IconExit } from "../icons";
+import Glagol from '../../App/Glagol'
 
 
 function CameraButton() {
-  const { videoEnabled } = useSelector((state: any) => state)
-  const dispatch = useDispatch()
-  const [ toggled, setToggled ] = useState(videoEnabled)
+const navigate=useNavigate()
+
 
   function getParams() {
-    const baseParams = {
+    return {
       padding: "0",
       width: "86px",
       height: "44px",
-      borderRadius: "3px"
-    }
-    if (!toggled) {
-      return {
-        ...baseParams,
-        color: '#f0ff85'
-      }
-    } else {
-      return {
-        ...baseParams,
-        color: "red",
-        backgroundColor: "rgba(255, 255, 255, .16)"
-      }
+      borderRadius: "3px",
+      color: "red"
     }
   }
 
   function click() {
-    dispatch(changeVideoEnabled())
-    setToggled(!toggled)
-    Glagol.changeVisibleVideo()
+    Glagol.stopVideo()
+    navigate('/exitPage')
+
   }
 
-  return <Button onClick={click} sx={{ padding: "0" }}>
+  return <Button  onClick={click} sx={{ padding: "0", color: 'orange' }}>
     <SvgIcon
       viewBox="0 0 86 44"
       sx={getParams()}
