@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Stack from '@mui/material/Stack';
 import AbstractIconButton from "../UI/button/AbstractIconButton";
 import { CameraButton, MicrophoneButton, ChatButton, TitleButton, RiseHandButton } from "../buttons";
-
+import ExitButton from "../buttons/ExitButton";
 
 function Toolbar() {
   const buttons = [ {
@@ -20,7 +20,11 @@ function Toolbar() {
   }, {
     key: "riseHand",
     component: <RiseHandButton/>
-  } ]
+  },
+    {
+      key: "exit",
+      component: <ExitButton />
+    } ]
   const {
           tollbarButtonsCenter,
           tollbarButtonsLeft,

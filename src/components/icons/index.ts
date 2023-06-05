@@ -4,4 +4,5 @@ export {default as IconMicrophone} from './Microfon'
 export {default as IconCamera} from './Camera'
 export {default as IconTitle} from './TitleView'
 export {default as IconSend} from './Send'
+export {default as IconExit} from './Exit'
 

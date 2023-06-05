@@ -1,30 +1,37 @@
 .start-page {
 display: flex;
   justify-content: space-between;
-}
-.create-name {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #efece5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  .create-name__button {
-  background-color: #1d565c;
-    white-space: nowrap;
-    color: var(--dark-theme-text);
+  .create-name {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #efece5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    &:hover {
-    background-color: #10f0ff;
-      color: black;
+    .create-name__button {
+      background-color: #1d565c;
+      white-space: nowrap;
+      color: var(--dark-theme-text);
+
+      &:hover {
+        background-color: #10f0ff;
+        color: black;
+      }
+      &_disabled {
+        color: #90ec86;
+      }
     }
+
+    .video {
+      width: 300px;
+    }
+  }
+
 }
 
-  .video {
-    width: 300px;
-  }
-}
+

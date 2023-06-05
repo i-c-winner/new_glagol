@@ -74,7 +74,8 @@ function CreatedDisplayName(props: any) {
           <TextField inputRef={displayNameRef} onChange={changeCurrentDisplayName} placeholder="Введите имя"
                      id="outlined-basic" label="Имя" variant="outlined"/>
           <Button classes={{
-            text: 'create-name__button'
+            text: 'create-name__button',
+            disabled: "create-name__button_disabled"
           }} onClick={creatingUser} variant="text" disabled={chackButton()}>Присоедениться ко встрече</Button>
         </Box>
         <video className="video" autoPlay={true} ref={refVideo}></video>
