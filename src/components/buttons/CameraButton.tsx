@@ -8,9 +8,9 @@ import { IconCamera } from "../icons";
 
 
 function CameraButton() {
-  const { videoEnabled } = useSelector((state: any) => state)
+  const { videoEnabled } = useSelector((state: any) => state.configSlice)
   const dispatch = useDispatch()
-  const [ toggled, setToggled ] = useState(videoEnabled)
+  const [ toggled, setToggled ] = useState(!videoEnabled)
 
   function getParams() {
     const baseParams = {

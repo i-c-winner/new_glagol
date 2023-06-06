@@ -55,6 +55,7 @@ function CreatedDisplayName(props: any) {
     return (props.status ? <div className="create-name">
       <Stack direction="row" spacing={8}>
         <Box
+          onSubmit={creatingUser}
           component="form"
           sx={{
             '& > :not(style)': {
@@ -71,7 +72,7 @@ function CreatedDisplayName(props: any) {
           noValidate
           autoComplete="off"
         >
-          <TextField inputRef={displayNameRef} onChange={changeCurrentDisplayName} placeholder="Введите имя"
+          <TextField inputRef={displayNameRef}  onChange={changeCurrentDisplayName} placeholder="Введите имя"
                      id="outlined-basic" label="Имя" variant="outlined"/>
           <Button classes={{
             text: 'create-name__button',

@@ -1,5 +1,5 @@
 import { changeVisibleChats } from "../../chat/ChatSlice";
-import {changeAudioEnabled, changeVideoEnabled} from "../../../App/configSlice";
+import { changeVideoEnabled} from "../../../App/configSlice";
 import Glagol from "../../../App/Glagol";
 
 type Params= {

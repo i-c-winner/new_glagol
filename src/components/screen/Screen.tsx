@@ -1,4 +1,3 @@
-import React from "react";
 import Glagol from "../../App/Glagol";
 
 function Screen() {

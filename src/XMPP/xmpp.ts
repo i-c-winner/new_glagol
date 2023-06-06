@@ -122,7 +122,7 @@ class XMPP {
       setTimeout(() => {
         this.peerConnection.setRemoteStreams()
         this.emit('updatedRemoteStreams', true)
-      }, 5000)
+      }, 10000)
     })
   }
 

@@ -5,8 +5,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "jsx": "react",
-    "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/no-var-requires": "off",
 
     /* Bundler mode */
     "moduleResolution": "bundler",
