@@ -7,6 +7,8 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
+import CameraButton from "../buttons/CameraButton";
+import MicrophoneButton from "../buttons/MicrophoneButton";
 
 function CreatedDisplayName(props: any) {
   const navigate = useNavigate()
@@ -55,30 +57,50 @@ function CreatedDisplayName(props: any) {
     return (props.status ? <div className="create-name">
       <Stack direction="row" spacing={8}>
         <Box
-          onSubmit={creatingUser}
-          component="form"
+          component="div"
           sx={{
-            '& > :not(style)': {
-              m: 1,
-              width: '250px',
-            },
             bgcolor: '#b8c2f0',
             boxShadow: 2,
-            p: 5,
-            display: 'flex',
-            flexFlow: 'column'
-
+            width: "400px"
           }}
-          noValidate
-          autoComplete="off"
         >
-          <TextField inputRef={displayNameRef}  onChange={changeCurrentDisplayName} placeholder="Введите имя"
-                     id="outlined-basic" label="Имя" variant="outlined"/>
-          <Button classes={{
-            text: 'create-name__button',
-            disabled: "create-name__button_disabled"
-          }} onClick={creatingUser} variant="text" disabled={chackButton()}>Присоедениться ко встрече</Button>
+          <Box
+            onSubmit={creatingUser}
+            component="form"
+            sx={{
+              '& > :not(style)': {
+                m: 1,
+                width: '250px',
+              },
+              bgcolor: '#b8c2f0',
+              p: 5,
+              display: 'flex',
+              flexFlow: 'column',
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField inputRef={displayNameRef}  classes={{root: "create-name__input"}} sx={{ width: "100%" }} onChange={changeCurrentDisplayName}
+                       placeholder="Введите имя"
+                       id="outlined-basic" label="Имя" variant="outlined"/>
+            <Button
+              classes={{
+                text: 'create-name__button',
+                disabled: "create-name__button_disabled",
+              }} onClick={creatingUser} variant="text" disabled={chackButton()}>Присоедениться ко встрече</Button>
+          </Box>
+          <Box
+            component="div"
+            sx={{
+              display: "flex",
+              justifyContent: "center"
+            }}
+          >
+            <CameraButton/>
+            <MicrophoneButton/>
+          </Box>
         </Box>
+
         <video className="video" autoPlay={true} ref={refVideo}></video>
       </Stack>
 

@@ -12,11 +12,16 @@ display: flex;
     display: flex;
     justify-content: center;
     align-items: center;
+    &__input {
+      width: 100%;
+      margin-bottom: 40px;
+    }
 
     .create-name__button {
       background-color: #1d565c;
       white-space: nowrap;
       color: var(--dark-theme-text);
+      width: 100%;
 
       &:hover {
         background-color: #10f0ff;
@@ -28,7 +33,7 @@ display: flex;
     }
 
     .video {
-      width: 300px;
+      width: 400px;
     }
   }
 }
