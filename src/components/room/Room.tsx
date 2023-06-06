@@ -1,5 +1,5 @@
 import BigScreen from "../bigScreen/BigScreen";
-import Toolbar from "../tollbar/Toolbar";
+import Toolbar from "../toolbar/Toolbar";
 
 function Room(props: any) {
   {

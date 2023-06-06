@@ -61,7 +61,8 @@ function CreatedDisplayName(props: any) {
           sx={{
             bgcolor: '#b8c2f0',
             boxShadow: 2,
-            width: "400px"
+            width: "400px",
+            height: "300px",
           }}
         >
           <Box

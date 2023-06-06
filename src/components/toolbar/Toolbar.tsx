@@ -26,21 +26,21 @@ function Toolbar() {
       component: <ExitButton />
     } ]
   const {
-          tollbarButtonsCenter,
-          tollbarButtonsLeft,
-          tollbarButtonsRight
+          toolbarButtonsCenter,
+          toolbarButtonsLeft,
+          toolbarButtonsRight
         } = useSelector((state: any) => state.interfaceSLice)
   const leftButtons = buttons.filter((button) => {
-    return tollbarButtonsLeft.includes(button.key)
+    return toolbarButtonsLeft.includes(button.key)
   })
   const centerButtons = buttons.filter((button) => {
-    return tollbarButtonsCenter.includes(button.key)
+    return toolbarButtonsCenter.includes(button.key)
   })
   const rightButtons = buttons.filter((button) => {
-    return tollbarButtonsRight.includes(button.key)
+    return toolbarButtonsRight.includes(button.key)
   })
 
-  return (<div className="tollbar">
+  return (<div className="toolbar">
     <Stack spacing={2} direction="row" sx={{
       flexGrow: "1",
       width: "33%",

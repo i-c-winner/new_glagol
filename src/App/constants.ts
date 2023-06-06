@@ -1,7 +1,7 @@
-const tollbarButtonsLeft = ["chat", "riseHand"]
+const toolbarButtonsLeft = ["chat", "riseHand"]
 
-const tollbarButtonsCenter = [ "microphone", "camera", "titleView"]
+const toolbarButtonsCenter = [ "microphone", "camera", "titleView"]
 
-const tollbarButtonsRight = ["exit"]
+const toolbarButtonsRight = ["exit"]
 
-export { tollbarButtonsCenter, tollbarButtonsLeft , tollbarButtonsRight}
+export { toolbarButtonsCenter, toolbarButtonsLeft , toolbarButtonsRight}

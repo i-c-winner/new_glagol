@@ -14,8 +14,3 @@ root.render(
     <RouterProvider router={router} />
   </Provider>
 );
-
-/**
- * TO DO Кнопки отключения камеры и микрофона на стартовой странциы
- *  TO DO Входить по ентеру
- */
