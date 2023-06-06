@@ -63,6 +63,8 @@ function CreatedDisplayName(props: any) {
             boxShadow: 2,
             width: "400px",
             height: "300px",
+            p: 4,
+            boxSizing: "border-box"
           }}
         >
           <Box
@@ -70,18 +72,17 @@ function CreatedDisplayName(props: any) {
             component="form"
             sx={{
               '& > :not(style)': {
-                m: 1,
                 width: '250px',
               },
               bgcolor: '#b8c2f0',
-              p: 5,
               display: 'flex',
               flexFlow: 'column',
             }}
             noValidate
             autoComplete="off"
           >
-            <TextField inputRef={displayNameRef}  classes={{root: "create-name__input"}} sx={{ width: "100%" }} onChange={changeCurrentDisplayName}
+            <TextField inputRef={displayNameRef} classes={{ root: "create-name__input" }} sx={{ width: "100%", mt: 3 }}
+                       onChange={changeCurrentDisplayName}
                        placeholder="Введите имя"
                        id="outlined-basic" label="Имя" variant="outlined"/>
             <Button
@@ -94,7 +95,11 @@ function CreatedDisplayName(props: any) {
             component="div"
             sx={{
               display: "flex",
-              justifyContent: "center"
+              p: 1,
+              mt: 4,
+              backgroundColor: "rgba(0, 0, 0, .25)",
+              borderRadius: "3px",
+              justifyContent: "center",
             }}
           >
             <CameraButton/>

@@ -22,7 +22,7 @@ function CameraButton() {
     if (!toggled) {
       return {
         ...baseParams,
-        color: '#f0ff85'
+        color: '#00ff85'
       }
     } else {
       return {
