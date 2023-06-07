@@ -17,6 +17,9 @@ const Glagol = {
   changeVisibleVideo() {
     return this.xmpp.changeVisibleVideo()
   },
+  changeAudio() {
+    return this.xmpp.changeAudio()
+  },
   stopVideo() {
     return this.xmpp.stopVideo()
   }

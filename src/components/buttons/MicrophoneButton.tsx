@@ -4,6 +4,7 @@ import { changeAudioEnabled} from "../../App/configSlice";
 import SvgIcon from "@mui/material/SvgIcon";
 import microphone from "../icons/Microfon";
 import Button from "@mui/material/Button";
+import Glagol from "../../App/Glagol";
 
 
 function MicrophoneButton() {
@@ -34,6 +35,7 @@ function MicrophoneButton() {
 
   function click() {
     dispatch(changeAudioEnabled())
+    Glagol.changeAudio()
     setToggled(!toggled)
   }
 

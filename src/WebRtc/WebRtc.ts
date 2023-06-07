@@ -10,7 +10,7 @@ class PeerConnection {
   public remoteStreams: any;
 
   constructor() {
-    this.startVideo = this.startVideo.bind(this)
+    this.changeAudio=this.changeAudio.bind(this)
     this.changeVisibleVideo = this.changeVisibleVideo.bind(this)
     this.localStream = undefined
     this._listener = {}
@@ -62,24 +62,13 @@ class PeerConnection {
   }
   stopVideo() {
     this.getLocalStream()?.getTracks().map((track) => {
-      console.log(track)
     track.stop()
     })
   }
-
-  startVideo() {
-    this.getLocalStream()?.getTracks().map((track) => {
-      if (track.kind === 'video') {
-        track.enabled=true
-      }
-    })
-  }
-
-  startAudio() {
+  changeAudio() {
     this.getLocalStream()?.getTracks().map((track) => {
       if (track.kind === 'audio') {
-        console.log(track)
-        track.enabled=true
+        track.enabled=!track.enabled
       }
     })
   }
