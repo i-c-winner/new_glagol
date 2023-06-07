@@ -7,7 +7,7 @@ function onListeners(this: any, event: string, callback: Function): void {
 }
 function emitListeners(this: any, event : string, ...args : any[]) {
   if (!this._listener[event]) {
-    console.error('Такая функция не установлена')
+    console.error(event, 'Такая функция не установлена')
   } else {
     this._listener[event].forEach((listener: Function) => {
       listener(args[0])
