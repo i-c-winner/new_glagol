@@ -10,7 +10,7 @@ const configSlice = createSlice({
     hasRoomName: false,
     hasDisplayName: false,
     videoEnabled: true,
-    audioEnabled: true
+    audioEnabled: true,
   },
   reducers: {
     changeDisplayName: (state, action) => {
@@ -37,8 +37,7 @@ const configSlice = createSlice({
     },
     changeAudioEnabled: (state) => {
       state.audioEnabled = !state.audioEnabled
-    }
-
+    },
   }
 })
 
@@ -50,6 +49,6 @@ export const {
                changeHasRoomName,
                changeHasDisplayName,
                changeAudioEnabled,
-               changeVideoEnabled
+               changeVideoEnabled,
              } = configSlice.actions
 export default configSlice.reducer

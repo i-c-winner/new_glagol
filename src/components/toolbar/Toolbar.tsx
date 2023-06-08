@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Stack from '@mui/material/Stack';
 import AbstractIconButton from "../UI/button/AbstractIconButton";
@@ -20,16 +21,18 @@ function Toolbar() {
   }, {
     key: "riseHand",
     component: <RiseHandButton/>
-  },
-    {
-      key: "exit",
-      component: <ExitButton />
-    } ]
+  }, {
+    key: "exit",
+    component: <ExitButton/>
+  } ]
   const {
           toolbarButtonsCenter,
           toolbarButtonsLeft,
           toolbarButtonsRight
         } = useSelector((state: any) => state.interfaceSLice)
+  const [ timer, setTimer ] = useState<any>(null)
+  const [ isVisibleToolbox, setIsVisibleToolbox ] = useState(true)
+
   const leftButtons = buttons.filter((button) => {
     return toolbarButtonsLeft.includes(button.key)
   })
@@ -40,35 +43,62 @@ function Toolbar() {
     return toolbarButtonsRight.includes(button.key)
   })
 
-  return (<div className="toolbar">
-    <Stack spacing={2} direction="row" sx={{
-      flexGrow: "1",
-      width: "33%",
-      justifyContent: "left"
-    }}>
-      {leftButtons.map((button) => {
-        return <AbstractIconButton key={button.key}>{button.component}</AbstractIconButton>
-      })}
-    </Stack>
-    <Stack spacing={2} direction="row" sx={{
-      flexGrow: "1",
-      width: "33%",
-      justifyContent: "center"
-    }}>
-      {centerButtons.map((button) => {
-        return <AbstractIconButton key={button.key}>{button.component}</AbstractIconButton>
-      })}
-    </Stack>
-    <Stack spacing={2} direction="row" sx={{
-      flexGrow: "1",
-      width: "33%",
-      justifyContent: "right"
-    }}>
-      {rightButtons.map((button) => {
-        return <AbstractIconButton key={button.key}>{button.component}</AbstractIconButton>
-      })}
-    </Stack>
+  function switchOnVisibleToolbox() {
+    setIsVisibleToolbox(true)
+  }
 
+  function swithOffVisibleToolbox() {
+    setTimer(() => {
+      return setTimeout(() => {
+        setIsVisibleToolbox(false)
+      }, 2000)
+    })
+  }
+
+  useEffect(() => {
+    return (() => {
+      clearTimeout(timer)
+    })
+  }, [ timer ])
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisibleToolbox(false)
+    }, 3000)
+    return (() => {
+      clearTimeout(timer)
+    })
+  }, [])
+  return (<div onMouseOver={switchOnVisibleToolbox} onMouseLeave={swithOffVisibleToolbox}
+               className="toolbar">
+    {isVisibleToolbox ? <div className="toolbar__wrapper">
+      <Stack spacing={2} direction="row" sx={{
+        flexGrow: "1",
+        width: "33%",
+        justifyContent: "left"
+      }}>
+        {leftButtons.map((button) => {
+          return <AbstractIconButton key={button.key}>{button.component}</AbstractIconButton>
+        })}
+      </Stack>
+      <Stack spacing={2} direction="row" sx={{
+        flexGrow: "1",
+        width: "33%",
+        justifyContent: "center"
+      }}>
+        {centerButtons.map((button) => {
+          return <AbstractIconButton key={button.key}>{button.component}</AbstractIconButton>
+        })}
+      </Stack>
+      <Stack spacing={2} direction="row" sx={{
+        flexGrow: "1",
+        width: "33%",
+        justifyContent: "right"
+      }}>
+        {rightButtons.map((button) => {
+          return <AbstractIconButton key={button.key}>{button.component}</AbstractIconButton>
+        })}
+      </Stack>
+    </div> : null}
   </div>)
 }
 

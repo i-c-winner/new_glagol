@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import Glagol from "../../App/Glagol";
 import RemoteStreams from "../remoteStreams/RemoteStreams";
 import Chat from "../chat/Chat";
-// import '../../css/components/bigScreen.scss'
 
 function BigScreen() {
   const bigScreenRef = useRef<any>(null)
@@ -21,8 +20,9 @@ function BigScreen() {
     }
    }, [ roomSource ])
 
+
   return (<div>
-      <div className="bigscreen">
+      <div  className="bigscreen">
         {visibleChats?<Chat />:null}
         <video autoPlay={true} ref={bigScreenRef} className=" proba bigscreen__video"></video>
         <RemoteStreams />
