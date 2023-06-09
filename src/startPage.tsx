@@ -1,50 +1,47 @@
-import { useEffect } from "react";
+import {useEffect} from "react";
 import Glagol from "./App/Glagol";
-import { useSelector, useDispatch } from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import { changeRoomName, changeHasRoomName, changeXMPPConnected, changeICreaterRoom } from "./App/configSlice";
-import { changeRoomSource, wasUpdateRemoteStreams } from "./components/bigScreen/roomSlice";
+import {changeRoomSource, wasUpdateRemoteStreams} from "./components/bigScreen/roomSlice";
 import CreatedDisplayName from "./components/room/CreatedDisplayName";
 import Room from "./components/room/Room";
 import getRandomText from "./plugins/getRandomText";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+
+Glagol.xmpp.init()
+Glagol.peerAddListener('doSignagling', Glagol.xmpp.doSignaling)
 
 
 function StartPage() {
   const dispatch = useDispatch()
   const hasRoomName = useSelector((state: any) => state.configSlice.hasRoomName)
   const hasDisplayName = useSelector((state: any) => state.configSlice.hasDisplayName)
-  const navigate = useNavigate()
+  const navigate=useNavigate()
   useEffect(() => {
-    Glagol.xmpp.init()
-
-    function addListeners() {
-      Glagol.peerAddListener('doSignagling', Glagol.xmpp.doSignaling)
-      Glagol.xmppAddListener('connected', listeners.XMPPConnected)
-      Glagol.peerAddListener('setLocalStream', listeners.setLocalStream)
-      Glagol.xmppAddListener('updatedRemoteStreams', listeners.updatedRemoteStreams)
-      Glagol.peerAddListener('updatedRemoteStreams', listeners.updatedRemoteStreams)
-    }
-    const listeners = {
-      XMPPConnected() {
-        dispatch(changeXMPPConnected(true))
-        Glagol.xmpp.peerInit()
-      },
-      setLocalStream() {
-        dispatch(changeRoomSource())
-      },
-      updatedRemoteStreams(...args: [ ...[ any ] ]) {
-        dispatch(wasUpdateRemoteStreams(args[0]))
-      }
+    Glagol.xmppAddListener('connected', XMPPConnected)
+    function XMPPConnected() {
+      dispatch(changeXMPPConnected(true))
+      Glagol.xmpp.peerInit()
     }
 
-    addListeners()
+    Glagol.peerAddListener('setLocalStream', setLocalStream)
+    function setLocalStream() {
+      dispatch(changeRoomSource())
+    }
+
+    Glagol.xmppAddListener('updatedRemoteStreams', updatedRemoteStreams)
+    Glagol.peerAddListener('updatedRemoteStreams', updatedRemoteStreams)
+
+    function updatedRemoteStreams(...args: [...[any]]) {
+      dispatch(wasUpdateRemoteStreams(args[0]))
+    }
 
     const url = window.location.pathname.split('/')[1]
     if (url !== "") {
       dispatch(changeHasRoomName(true))
       dispatch(changeRoomName(url))
     } else {
-      const url = getRandomText(8)
+      const url=getRandomText(8)
       dispatch(changeRoomName(url))
       dispatch(changeHasRoomName(true))
       dispatch(changeICreaterRoom(true))
@@ -65,7 +62,8 @@ function StartPage() {
     <div className="start-page">
       <CreatedDisplayName status={startingRoomName()}/>
       <Room status={startingRoom()}/>
-    </div>)
+    </div>
+  )
 }
 
 export default StartPage;
