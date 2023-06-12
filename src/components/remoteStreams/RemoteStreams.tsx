@@ -5,12 +5,13 @@ import SmallScreen from "../smallScreen/SmallScreen";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Glagol from "../../App/Glagol";
+import { StateRoomSlice } from "../bigScreen/roomSlice"
 
 function RemoteStreams() {
   console.log('renmoteStrreams')
   const [remoteStreams, setRemoteStreams] = useState([])
   const dispatch = useDispatch()
-  const { remoteStreamsWereUpdated } = useSelector((state: any) => state.roomSlice)
+  const { remoteStreamsWereUpdated } = useSelector((state: StateRoomSlice) => state.roomSlice)
 
   useEffect(() => {
     if (remoteStreamsWereUpdated) {

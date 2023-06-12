@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import Glagol from "../../App/Glagol";
 import RemoteStreams from "../remoteStreams/RemoteStreams";
 import Chat from "../chat/Chat";
+import { StateRoomSlice } from "./roomSlice";
+import { StateChatSlice } from "../chat/ChatSlice";
 
 function BigScreen() {
   const bigScreenRef = useRef<any>(null)
-  const { roomSource } = useSelector((state: any) => state.roomSlice)
-  const { visibleChats } = useSelector((state: any) => state.chatSlice)
+  const { roomSource } = useSelector((state: StateRoomSlice) => state.roomSlice)
+  const { visibleChats } = useSelector((state: StateChatSlice) => state.chatSlice)
   useEffect(() => {
     const localStream: any = Glagol.getLocalStream()
 
@@ -19,7 +21,6 @@ function BigScreen() {
       })
     }
   }, [roomSource])
-
   return (<div>
     <div className="bigscreen">
       {visibleChats ? <Chat /> : null}

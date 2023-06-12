@@ -1,9 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export type StateChatSlice = {
+  chatSlice: {
+    chatsList: {
+      author: string,
+      text: string
+    }[],
+    visibleChats: boolean
+  }
+}
+
 const chatSlice = createSlice({
   name: "chat",
   initialState: {
-    chatsList: [ {
+    chatsList: [{
       author: 'i',
       text: 'my text'
     }, {
@@ -24,7 +34,7 @@ const chatSlice = createSlice({
        деятельности играет важную роль в формировании модели развития. Повседневная практика 
        показывает, что постоянный количественный рост и сфера нашей активности обеспечивает 
        широкому кругу (специалистов) участие в формировании дальнейших направлений развития.`
-    } ],
+    }],
     visibleChats: false
   },
 
@@ -32,8 +42,8 @@ const chatSlice = createSlice({
     addChatStrophe: (state, action) => {
       state.chatsList.push(action.payload)
     },
-    changeVisibleChats: ((state)=>{
-      state.visibleChats=!state.visibleChats
+    changeVisibleChats: ((state) => {
+      state.visibleChats = !state.visibleChats
     })
   }
 })

@@ -1,4 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+export type StateRoomSlice = {
+    roomSlice: {
+        roomSource: boolean
+        remoteStreamsWereUpdated: boolean
+    }
+}
 const roomSlice = createSlice({
     name: 'room',
     initialState: {
