@@ -6,22 +6,27 @@ import { IconSend } from "../icons";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { addChatStrophe } from "./ChatSlice";
+import { StateConfigSlice } from "../../App/configSlice";
 
 
 function ChatsMessage() {
   const dispatch = useDispatch()
-  const { displayName } = useSelector((state: any) => state.configSlice)
-  const textRef = useRef<any>('')
+  const { displayName } = useSelector((state: StateConfigSlice) => state.configSlice)
+  const textRef = useRef<HTMLTextAreaElement | null>(null)
 
   function changeMessage(event: any) {
-    textRef.current.value = event.target.value;
+    if (typeof textRef.current !== null) {
+      if (textRef.current !== null) textRef.current.value = event.target.value;
+    }
   }
 
   function sendMessage() {
-    dispatch(addChatStrophe({
-      author: displayName,
-      text: textRef.current.value
-    }))
+    if (textRef.current !== null) {
+      dispatch(addChatStrophe({
+        author: displayName,
+        text: textRef.current.value
+      }))
+    }
   }
 
   const TextArea = styled(TextareaAutosize)(() => {
@@ -34,7 +39,7 @@ border-radius: 5px
 
   })
   return <div className="chat-message">
-    <TextArea ref={textRef} onChange={changeMessage} placeholder="Введите сообщение"/>
+    <TextArea ref={textRef} onChange={changeMessage} placeholder="Введите сообщение" />
     <Button sx={{
       color: "white",
       "&:hover": {
@@ -42,9 +47,9 @@ border-radius: 5px
         cursor: "pointer"
       }
     }}
-            className="send__icon"
-            onClick={sendMessage}>
-      <SvgIcon children={IconSend}/>
+      className="send__icon"
+      onClick={sendMessage}>
+      <SvgIcon children={IconSend} />
     </Button>
   </div>
 

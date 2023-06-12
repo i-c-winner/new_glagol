@@ -9,26 +9,33 @@ import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import CameraButton from "../buttons/CameraButton";
 import MicrophoneButton from "../buttons/MicrophoneButton";
+import { StateConfigSlice } from "../../App/configSlice";
+import { StateRoomSlice } from "../bigScreen/roomSlice";
+type Props = {
+  status: boolean
+}
 
-function CreatedDisplayName(props: any) {
+function CreatedDisplayName(props: Props) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [ currentDisplayName, setCurrenDisplayName ] = useState<any>('')
+  const [currentDisplayName, setCurrenDisplayName] = useState('')
   const displayNameRef = useRef<any>('')
   const {
-          iCreaterRoom,
-          roomName
-        } = useSelector((state: any) => state.configSlice)
-  const { roomSource } = useSelector((state: any) => state.roomSlice)
+    iCreaterRoom,
+    roomName
+  } = useSelector((state: StateConfigSlice) => state.configSlice)
+  const { roomSource } = useSelector((state: StateRoomSlice) => state.roomSlice)
   const refVideo = useRef<any>()
 
   useEffect(() => {
-    if (roomSource) refVideo.current.srcObject = Glagol.getLocalStream()
-  }, [ roomSource ])
+    if (roomSource) {
+      refVideo.current.srcObject = Glagol.getLocalStream()
+    }
+  }, [roomSource])
 
   function creatingUser() {
     dispatch(changeHasDisplayName(true))
-    dispatch(changeDisplayName(displayNameRef.current.value))
+    dispatch(changeDisplayName(displayNameRef.current.valueOf))
 
     if (iCreaterRoom) {
       Glagol.xmpp.createRoom(roomName)
@@ -82,9 +89,9 @@ function CreatedDisplayName(props: any) {
             autoComplete="off"
           >
             <TextField inputRef={displayNameRef} classes={{ root: "create-name__input" }} sx={{ width: "100%", mt: 3 }}
-                       onChange={changeCurrentDisplayName}
-                       placeholder="Введите имя"
-                       id="outlined-basic" label="Имя" variant="outlined"/>
+              onChange={changeCurrentDisplayName}
+              placeholder="Введите имя"
+              id="outlined-basic" label="Имя" variant="outlined" />
             <Button
               classes={{
                 text: 'create-name__button',
@@ -102,8 +109,8 @@ function CreatedDisplayName(props: any) {
               justifyContent: "center",
             }}
           >
-            <CameraButton/>
-            <MicrophoneButton/>
+            <CameraButton />
+            <MicrophoneButton />
           </Box>
         </Box>
 

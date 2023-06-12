@@ -5,12 +5,13 @@ import SvgIcon from "@mui/material/SvgIcon"
 import Button from "@mui/material/Button";
 import Glagol from "../../App/Glagol";
 import { IconCamera } from "../icons";
+import { StateConfigSlice } from "../../App/configSlice";
 
 
 function CameraButton() {
-  const { videoEnabled } = useSelector((state: any) => state.configSlice)
+  const { videoEnabled } = useSelector((state: StateConfigSlice) => state.configSlice)
   const dispatch = useDispatch()
-  const [ toggled, setToggled ] = useState(!videoEnabled)
+  const [toggled, setToggled] = useState(!videoEnabled)
 
   function getParams() {
     const baseParams = {
@@ -43,7 +44,7 @@ function CameraButton() {
     <SvgIcon
       viewBox="0 0 35 35"
       sx={getParams()}
-      children={IconCamera}/>
+      children={IconCamera} />
   </Button>
 }
 

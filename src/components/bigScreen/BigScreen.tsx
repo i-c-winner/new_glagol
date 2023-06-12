@@ -7,7 +7,7 @@ import { StateRoomSlice } from "./roomSlice";
 import { StateChatSlice } from "../chat/ChatSlice";
 
 function BigScreen() {
-  const bigScreenRef = useRef<any>(null)
+  const bigScreenRef = useRef<null | HTMLVideoElement>(null)
   const { roomSource } = useSelector((state: StateRoomSlice) => state.roomSlice)
   const { visibleChats } = useSelector((state: StateChatSlice) => state.chatSlice)
   useEffect(() => {
@@ -16,7 +16,9 @@ function BigScreen() {
     if (bigScreenRef.current !== null) {
       localStream.getTracks().forEach((track: MediaStreamTrack) => {
         if (track.kind === 'video') {
-          bigScreenRef.current.srcObject = localStream
+          if (bigScreenRef.current !== null) {
+            bigScreenRef.current.srcObject = localStream
+          }
         }
       })
     }
