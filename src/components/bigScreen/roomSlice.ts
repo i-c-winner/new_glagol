@@ -9,10 +9,10 @@ const roomSlice = createSlice({
         changeRoomSource: function (state) {
             state.roomSource = true;
         },
-        wasUpdateRemoteStreams: function(state, action) {
-            state.remoteStreamsWereUpdated=action.payload
+        wasUpdateRemoteStreams: function (state, action) {
+            state.remoteStreamsWereUpdated = action.payload
         }
     }
 });
-export const {changeRoomSource, wasUpdateRemoteStreams} = roomSlice.actions;
+export const { changeRoomSource, wasUpdateRemoteStreams } = roomSlice.actions;
 export default roomSlice.reducer;

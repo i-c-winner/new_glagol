@@ -8,7 +8,7 @@ import Glagol from "../../App/Glagol";
 
 function RemoteStreams() {
   console.log('renmoteStrreams')
-  const [ remoteStreams, setRemoteStreams ] = useState([])
+  const [remoteStreams, setRemoteStreams] = useState([])
   const dispatch = useDispatch()
   const { remoteStreamsWereUpdated } = useSelector((state: any) => state.roomSlice)
 
@@ -18,22 +18,22 @@ function RemoteStreams() {
       setRemoteStreams(Glagol.getRemoteStreams().slice(2))
       dispatch(wasUpdateRemoteStreams(false))
     }
-  }, [ remoteStreamsWereUpdated ])
+  }, [remoteStreamsWereUpdated])
   return (<List sx={{
-      width: '100%',
-      maxWidth: 360,
-      bgcolor: 'background.paper'
-    }}
-                classes= {{
+    width: '100%',
+    maxWidth: 360,
+    bgcolor: 'background.paper'
+  }}
+    classes={{
       root: "remote-streams"
     }}
-    >
-      {remoteStreams.map((stream: any, index) => {
-        return <ListItem alignItems="flex-start" key={index}>
-          <SmallScreen stream={stream}/>
-        </ListItem>
-      })}
-    </List>)
+  >
+    {remoteStreams.map((stream: any, index) => {
+      return <ListItem alignItems="flex-start" key={index}>
+        <SmallScreen stream={stream} />
+      </ListItem>
+    })}
+  </List>)
 }
 
 export default RemoteStreams

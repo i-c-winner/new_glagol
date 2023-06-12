@@ -7,30 +7,27 @@ import Chat from "../chat/Chat";
 function BigScreen() {
   const bigScreenRef = useRef<any>(null)
   const { roomSource } = useSelector((state: any) => state.roomSlice)
-  const {visibleChats}=useSelector((state: any)=>state.chatSlice)
-   useEffect(() => {
+  const { visibleChats } = useSelector((state: any) => state.chatSlice)
+  useEffect(() => {
     const localStream: any = Glagol.getLocalStream()
 
-    if (bigScreenRef.current!==null) {
+    if (bigScreenRef.current !== null) {
       localStream.getTracks().forEach((track: MediaStreamTrack) => {
         if (track.kind === 'video') {
           bigScreenRef.current.srcObject = localStream
         }
       })
     }
-   }, [ roomSource ])
-
+  }, [roomSource])
 
   return (<div>
-      <div  className="bigscreen">
-        {visibleChats?<Chat />:null}
-        <video autoPlay={true} ref={bigScreenRef} className=" proba bigscreen__video"></video>
-        <RemoteStreams />
-      </div>
+    <div className="bigscreen">
+      {visibleChats ? <Chat /> : null}
+      <video autoPlay={true} ref={bigScreenRef} className=" proba bigscreen__video"></video>
+      <RemoteStreams />
     </div>
-
+  </div>
   )
 }
 
 export default BigScreen;
-``
