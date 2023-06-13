@@ -46,7 +46,7 @@ function CreatedDisplayName(props: Props) {
   }
 
   function changeCurrentDisplayName() {
-    setCurrenDisplayName(displayNameRef.current)
+    setCurrenDisplayName(displayNameRef.current.value)
   }
 
   function chackButton() {

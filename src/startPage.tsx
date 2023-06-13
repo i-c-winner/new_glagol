@@ -1,12 +1,13 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 import Glagol from "./App/Glagol";
-import {useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { changeRoomName, changeHasRoomName, changeXMPPConnected, changeICreaterRoom } from "./App/configSlice";
-import {changeRoomSource, wasUpdateRemoteStreams} from "./components/bigScreen/roomSlice";
+import { changeRoomSource, wasUpdateRemoteStreams } from "./components/bigScreen/roomSlice";
 import CreatedDisplayName from "./components/room/CreatedDisplayName";
 import Room from "./components/room/Room";
 import getRandomText from "./plugins/getRandomText";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { StateConfigSlice } from "./App/configSlice";
 
 Glagol.xmpp.init()
 Glagol.peerAddListener('doSignagling', Glagol.xmpp.doSignaling)
@@ -14,9 +15,9 @@ Glagol.peerAddListener('doSignagling', Glagol.xmpp.doSignaling)
 
 function StartPage() {
   const dispatch = useDispatch()
-  const hasRoomName = useSelector((state: any) => state.configSlice.hasRoomName)
-  const hasDisplayName = useSelector((state: any) => state.configSlice.hasDisplayName)
-  const navigate=useNavigate()
+  const hasRoomName = useSelector((state: StateConfigSlice) => state.configSlice.hasRoomName)
+  const hasDisplayName = useSelector((state: StateConfigSlice) => state.configSlice.hasDisplayName)
+  const navigate = useNavigate()
   useEffect(() => {
     Glagol.xmppAddListener('connected', XMPPConnected)
     function XMPPConnected() {
@@ -32,7 +33,7 @@ function StartPage() {
     Glagol.xmppAddListener('updatedRemoteStreams', updatedRemoteStreams)
     Glagol.peerAddListener('updatedRemoteStreams', updatedRemoteStreams)
 
-    function updatedRemoteStreams(...args: [...[any]]) {
+    function updatedRemoteStreams(...args: [...[unknown]]) {
       dispatch(wasUpdateRemoteStreams(args[0]))
     }
 
@@ -41,7 +42,7 @@ function StartPage() {
       dispatch(changeHasRoomName(true))
       dispatch(changeRoomName(url))
     } else {
-      const url=getRandomText(8)
+      const url = getRandomText(8)
       dispatch(changeRoomName(url))
       dispatch(changeHasRoomName(true))
       dispatch(changeICreaterRoom(true))
@@ -60,8 +61,8 @@ function StartPage() {
   return (
 
     <div className="start-page">
-      <CreatedDisplayName status={startingRoomName()}/>
-      <Room status={startingRoom()}/>
+      <CreatedDisplayName status={startingRoomName()} />
+      <Room status={startingRoom()} />
     </div>
   )
 }
