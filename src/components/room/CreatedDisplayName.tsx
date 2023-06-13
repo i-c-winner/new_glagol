@@ -19,7 +19,7 @@ function CreatedDisplayName(props: Props) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [currentDisplayName, setCurrenDisplayName] = useState('')
-  const displayNameRef = useRef<any>('')
+  const displayNameRef = useRef<any>()
   const {
     iCreaterRoom,
     roomName
@@ -35,8 +35,8 @@ function CreatedDisplayName(props: Props) {
 
   function creatingUser() {
     dispatch(changeHasDisplayName(true))
-    dispatch(changeDisplayName(displayNameRef.current.valueOf))
 
+    dispatch(changeDisplayName(displayNameRef.current.value))
     if (iCreaterRoom) {
       Glagol.xmpp.createRoom(roomName)
     } else {
@@ -46,7 +46,7 @@ function CreatedDisplayName(props: Props) {
   }
 
   function changeCurrentDisplayName() {
-    setCurrenDisplayName(displayNameRef.current.value)
+    setCurrenDisplayName(displayNameRef.current)
   }
 
   function chackButton() {
@@ -113,11 +113,8 @@ function CreatedDisplayName(props: Props) {
             <MicrophoneButton />
           </Box>
         </Box>
-
         <video className="video" autoPlay={true} ref={refVideo}></video>
       </Stack>
-
-
     </div> : null)
   }
 }
