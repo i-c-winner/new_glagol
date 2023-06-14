@@ -12,7 +12,7 @@ function BigScreen() {
   useEffect(() => {
     if (localStream !== null) {
       if (bigScreenRef.current !== null) {
-        bigScreenRef.current.srcObject = localStream[0]
+        bigScreenRef.current.srcObject = localStream
       }
     }
 

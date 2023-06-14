@@ -148,7 +148,6 @@ class XMPP {
     }).c('body').t('Proba').up().c('x', {
       xmlns: 'http://jabber.org/protocol/muc#user'
     })
-    debugger
     this.connection.send(message)
   }
 

@@ -27,8 +27,10 @@ function StartPage() {
     }
 
     Glagol.peerAddListener('setLocalStream', setLocalStream)
-    function setLocalStream(...args: [...[unknown]]) {
-      dispatch(updateLocalStream(args[0]))
+    function setLocalStream() {
+      navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then((stream) => {
+        dispatch(updateLocalStream(stream))
+      })
       dispatch(changeRoomSource())
     }
 

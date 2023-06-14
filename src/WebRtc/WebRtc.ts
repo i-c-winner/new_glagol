@@ -33,7 +33,7 @@ class PeerConnection {
       audio: true
     }).then((stream: MediaStream) => {
       this.localStream = stream
-      this.emit('setLocalStream', stream)
+      this.emit('setLocalStream')
       stream.getTracks().forEach((track) => {
         this.pc.addTrack(track)
       })
