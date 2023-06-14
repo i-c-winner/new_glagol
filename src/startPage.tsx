@@ -1,13 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import Glagol from "./App/Glagol";
 import { useSelector, useDispatch } from "react-redux";
 import { changeRoomName, changeHasRoomName, changeXMPPConnected, changeICreaterRoom } from "./App/configSlice";
-import { changeRoomSource, wasUpdateRemoteStreams } from "./components/bigScreen/roomSlice";
+import { changeRoomSource, wasUpdateRemoteStreams, updateLocalStream } from "./components/bigScreen/roomSlice";
 import CreatedDisplayName from "./components/room/CreatedDisplayName";
 import Room from "./components/room/Room";
 import getRandomText from "./plugins/getRandomText";
 import { useNavigate } from "react-router-dom";
 import { StateConfigSlice } from "./App/configSlice";
+// import { LocalStream } from "./components/bigScreen/roomSlice";
 
 Glagol.xmpp.init()
 Glagol.peerAddListener('doSignagling', Glagol.xmpp.doSignaling)
@@ -15,6 +16,19 @@ Glagol.peerAddListener('doSignagling', Glagol.xmpp.doSignaling)
 
 function StartPage() {
   const dispatch = useDispatch()
+  const dispatchLocalStream: any = (mediaDevices: any) => async (dispatch: any) => {
+    // const result = await fetch('https://jsonplaceholder.typicode.com/posts/1').then((res) => res.json()).then((res) => {
+    //   return res
+    // })
+
+    // mediaDevices({ audio: true, video: true }).then((res: any) => dispatch(updateLocalStream(res)))
+    navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then((res) => {
+      return res
+    })
+    console.log(mediaDevices())
+
+  }
+
   const hasRoomName = useSelector((state: StateConfigSlice) => state.configSlice.hasRoomName)
   const hasDisplayName = useSelector((state: StateConfigSlice) => state.configSlice.hasDisplayName)
   const navigate = useNavigate()
@@ -26,7 +40,10 @@ function StartPage() {
     }
 
     Glagol.peerAddListener('setLocalStream', setLocalStream)
-    function setLocalStream() {
+    function setLocalStream(...args: [...[unknown]]) {
+      // dispatch(dispatchLocalStream())
+      console.log(args[0])
+      dispatch(updateLocalStream(args[0]))
       dispatch(changeRoomSource())
     }
 
@@ -50,7 +67,7 @@ function StartPage() {
     }
   }, [])
 
-  function startingRoomName() {
+  /*  */function startingRoomName() {
     return hasRoomName && !hasDisplayName
   }
 

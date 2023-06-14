@@ -1,15 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { Dispatch, createSlice } from "@reduxjs/toolkit";
 export type StateRoomSlice = {
     roomSlice: {
         roomSource: boolean
-        remoteStreamsWereUpdated: boolean
+        remoteStreamsWereUpdated: boolean,
+        localStream?: any
     }
 }
 const roomSlice = createSlice({
     name: 'room',
     initialState: {
         roomSource: false,
-        remoteStreamsWereUpdated: false
+        remoteStreamsWereUpdated: false,
+        localStream: null
     },
     reducers: {
         changeRoomSource: function (state) {
@@ -17,8 +19,15 @@ const roomSlice = createSlice({
         },
         wasUpdateRemoteStreams: function (state, action) {
             state.remoteStreamsWereUpdated = action.payload
+        },
+        updateLocalStream: function (state, action) {
+            state.localStream = action.payload
+            console.log(state.localStream)
         }
-    }
+    },
+
 });
-export const { changeRoomSource, wasUpdateRemoteStreams } = roomSlice.actions;
+
+export const { changeRoomSource, wasUpdateRemoteStreams, updateLocalStream } = roomSlice.actions;
 export default roomSlice.reducer;
+

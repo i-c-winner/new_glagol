@@ -5,6 +5,6 @@ import interfaceSLice from "../App/interfaceSLice";
 import chatSlice from "../components/chat/ChatSlice";
 import thunk from "redux-thunk";
 export default configureStore({
-  reducer: {roomSlice, configSlice, interfaceSLice, chatSlice},
+  reducer: { roomSlice, configSlice, interfaceSLice, chatSlice },
   middleware: [thunk]
 })

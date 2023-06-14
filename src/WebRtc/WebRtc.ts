@@ -3,21 +3,21 @@ import { onListeners, emitListeners } from "../plugins/createListeners";
 class PeerConnection {
   pc: RTCPeerConnection;
   // @ts-ignore
-  private _listener: { [key: string]: [ ...Function[] ] };
+  private _listener: { [key: string]: [...Function[]] };
   // @ts-ignore
   private localDescription: any;
   private localStream: undefined | MediaStream;
   public remoteStreams: any;
 
   constructor() {
-    this.changeAudio=this.changeAudio.bind(this)
+    this.changeAudio = this.changeAudio.bind(this)
     this.changeVisibleVideo = this.changeVisibleVideo.bind(this)
     this.localStream = undefined
     this._listener = {}
     this.pc = new RTCPeerConnection({
-      iceServers: [ {
+      iceServers: [{
         urls: 'stun:stun.l.google.com:19302'
-      } ]
+      }]
     })
     this.pc.onicecandidate = (event => {
       if (event.candidate === null) {
@@ -33,7 +33,7 @@ class PeerConnection {
       audio: true
     }).then((stream: MediaStream) => {
       this.localStream = stream
-      this.emit('setLocalStream')
+      this.emit('setLocalStream', stream)
       stream.getTracks().forEach((track) => {
         this.pc.addTrack(track)
       })
@@ -56,19 +56,19 @@ class PeerConnection {
   changeVisibleVideo() {
     this.getLocalStream()?.getTracks().map((track) => {
       if (track.kind === 'video') {
-        track.enabled=!track.enabled
+        track.enabled = !track.enabled
       }
     })
   }
   stopVideo() {
     this.getLocalStream()?.getTracks().map((track) => {
-    track.stop()
+      track.stop()
     })
   }
   changeAudio() {
     this.getLocalStream()?.getTracks().map((track) => {
       if (track.kind === 'audio') {
-        track.enabled=!track.enabled
+        track.enabled = !track.enabled
       }
     })
   }

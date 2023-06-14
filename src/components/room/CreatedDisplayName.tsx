@@ -24,7 +24,10 @@ function CreatedDisplayName(props: Props) {
     iCreaterRoom,
     roomName
   } = useSelector((state: StateConfigSlice) => state.configSlice)
-  const { roomSource } = useSelector((state: StateRoomSlice) => state.roomSlice)
+  const { roomSource } = useSelector((state: StateRoomSlice) => {
+    return state.roomSlice
+  }
+  )
   const refVideo = useRef<any>()
 
   useEffect(() => {

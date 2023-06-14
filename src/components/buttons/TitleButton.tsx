@@ -2,11 +2,13 @@ import { useState } from "react";;
 import SvgIcon from "@mui/material/SvgIcon";
 import { IconTitle } from "../icons";
 import Button from "@mui/material/Button";
+import { useSelector } from "react-redux";
 
 
 function TitleButton() {
-  const [ toggled, setToggled ] = useState(false)
-
+  const [toggled, setToggled] = useState(false)
+  const localStream = useSelector((state: any) => state.roomSlice.localStream)
+  console.log(localStream, 'useEffect')
   function getParams() {
     const baseParams = {
       padding: "0",
@@ -35,7 +37,7 @@ function TitleButton() {
     <SvgIcon
       viewBox="0 0 35 35"
       sx={getParams()}
-      children={IconTitle}/>
+      children={IconTitle} />
   </Button>
 }
 
