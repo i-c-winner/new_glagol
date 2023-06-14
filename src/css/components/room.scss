@@ -1,4 +1,17 @@
 .room {
   flex-grow: 1;
   position: relative;
+
+  .bigscreen {
+    background-color: var(--dark-theme-main);
+
+    &__video {
+      width: 100%;
+      height: 98vh;
+    }
+
+    .proba {
+      color: green;
+    }
+  }
 }

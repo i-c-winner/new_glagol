@@ -11,6 +11,7 @@ import CameraButton from "../buttons/CameraButton";
 import MicrophoneButton from "../buttons/MicrophoneButton";
 import { StateConfigSlice } from "../../App/configSlice";
 import { StateRoomSlice } from "../bigScreen/roomSlice";
+import BigScreen from "../bigScreen/BigScreen";
 type Props = {
   status: boolean
 }
@@ -116,7 +117,10 @@ function CreatedDisplayName(props: Props) {
             <MicrophoneButton />
           </Box>
         </Box>
-        <video className="video" autoPlay={true} ref={refVideo}></video>
+        <div className="video" ref={refVideo}>
+          <BigScreen />
+        </div>
+
       </Stack>
     </div> : null)
   }

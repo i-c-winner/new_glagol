@@ -1,9 +1,9 @@
-import { Dispatch, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 export type StateRoomSlice = {
     roomSlice: {
         roomSource: boolean
         remoteStreamsWereUpdated: boolean,
-        localStream?: any
+        localStream: any
     }
 }
 const roomSlice = createSlice({

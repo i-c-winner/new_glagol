@@ -1,5 +1,5 @@
 .start-page {
-display: flex;
+  display: flex;
   justify-content: space-between;
 
   .create-name {
@@ -12,6 +12,7 @@ display: flex;
     display: flex;
     justify-content: center;
     align-items: center;
+
     &__input {
       width: 100%;
       margin-bottom: 40px;
@@ -27,6 +28,7 @@ display: flex;
         background-color: #10f0ff;
         color: black;
       }
+
       &_disabled {
         color: #90ec86;
       }
@@ -36,6 +38,9 @@ display: flex;
       width: 400px;
     }
   }
+
+  .bigscreen__video {
+    height: 300px;
+    width: initial;
+  }
 }
-
-
