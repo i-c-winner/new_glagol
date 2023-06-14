@@ -45,7 +45,6 @@ const configSlice = createSlice({
       state.iCreaterRoom = action.payload
     },
     changeVideoEnabled: (state) => {
-      console.log(state.videoEnabled)
       state.videoEnabled = !state.videoEnabled
     },
     changeAudioEnabled: (state) => {

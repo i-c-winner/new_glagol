@@ -46,15 +46,15 @@ class XMPP {
       // calling submit will continue the registration process
       this.connection.register.submit();
     } else if (status === Strophe.Status.REGISTERED) {
-      console.log("registered!");
+      console.info("registered!");
       // calling login will authenticate the registered JID.
       this.connection.authenticate();
     } else if (status === Strophe.Status.CONFLICT) {
-      console.log("Contact already existed!");
+      console.info("Contact already existed!");
     } else if (status === Strophe.Status.NOTACCEPTABLE) {
-      console.log("Registration form not properly filled out.")
+      console.info("Registration form not properly filled out.")
     } else if (status === Strophe.Status.REGIFAIL) {
-      console.log("The Server does not support In-Band Registration")
+      console.info("The Server does not support In-Band Registration")
     } else if (status === Strophe.Status.CONNECTED) {
       this.connection.addHandler(this.addHandlerMessage, null, 'message')
       this.connection.addHandler(this.addHandlerResponce, null, 'presence')
@@ -94,7 +94,7 @@ class XMPP {
     this.validateCreateRoom(roomName)
   }
 
-  doSignaling = (...args: [ ...any[] ]) => {
+  doSignaling = (...args: [...any[]]) => {
     const message = new Strophe.Builder('message', {
       to: 'admin_cs@prosolen.net',
       type: 'chat'
@@ -105,7 +105,7 @@ class XMPP {
   setRemoteDescription(description: string) {
     const rtcsd = new RTCSessionDescription(JSON.parse(window.atob(description)))
     this.peerConnection.remoteStreams = rtcsd
-    console.log("Received from remote remote Description")
+    console.info("Received from remote remote Description")
     try {
       this.peerConnection.pc.setRemoteDescription(rtcsd)
     } catch (e) {
@@ -115,7 +115,7 @@ class XMPP {
 
   addVideo() {
     this.peerConnection.pc.addTransceiver('video', { 'direction': 'recvonly' })
-    console.log()
+
     this.peerConnection.pc.addTransceiver('audio', { 'direction': 'recvonly' })
     this.peerConnection.pc.createOffer({ 'iceRestart': true }).then(offer => {
       this.peerConnection.pc.setLocalDescription(offer)

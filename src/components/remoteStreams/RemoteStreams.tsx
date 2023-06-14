@@ -8,14 +8,12 @@ import Glagol from "../../App/Glagol";
 import { StateRoomSlice } from "../bigScreen/roomSlice"
 
 function RemoteStreams() {
-  console.log('renmoteStrreams')
   const [remoteStreams, setRemoteStreams] = useState([])
   const dispatch = useDispatch()
   const { remoteStreamsWereUpdated } = useSelector((state: StateRoomSlice) => state.roomSlice)
 
   useEffect(() => {
     if (remoteStreamsWereUpdated) {
-      console.log(Glagol.getRemoteStreams().slice(2))
       setRemoteStreams(Glagol.getRemoteStreams().slice(2))
       dispatch(wasUpdateRemoteStreams(false))
     }
@@ -29,7 +27,12 @@ function RemoteStreams() {
       root: "remote-streams"
     }}
   >
-    {remoteStreams.map((stream, index) => {
+    {remoteStreams.map((stream: any, index) => {
+      stream.getTracks().forEach((track: any) => {
+        if (track.kind === 'audio') {
+          stream.removeTrack(track)
+        }
+      })
       return <ListItem alignItems="flex-start" key={index}>
         <SmallScreen stream={stream} />
       </ListItem>

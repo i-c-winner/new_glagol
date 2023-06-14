@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 function TitleButton() {
   const [toggled, setToggled] = useState(false)
   const localStream = useSelector((state: any) => state.roomSlice.localStream)
-  console.log(localStream, 'useEffect')
   function getParams() {
     const baseParams = {
       padding: "0",

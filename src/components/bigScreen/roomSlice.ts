@@ -22,7 +22,6 @@ const roomSlice = createSlice({
         },
         updateLocalStream: function (state, action) {
             state.localStream = action.payload
-            console.log(state.localStream)
         }
     },
 

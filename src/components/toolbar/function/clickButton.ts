@@ -1,8 +1,8 @@
 import { changeVisibleChats } from "../../chat/ChatSlice";
-import { changeVideoEnabled} from "../../../App/configSlice";
+import { changeVideoEnabled } from "../../../App/configSlice";
 import Glagol from "../../../App/Glagol";
 
-type Params= {
+type Params = {
   dispatch: Function,
   button: string,
   state?: any
@@ -14,14 +14,12 @@ function clickButton(params: Params) {
       params.dispatch(changeVisibleChats())
       break
     case "settings":
-      console.log('settings')
       break
     case "camera":
       params.dispatch(changeVideoEnabled())
       Glagol.changeVisibleVideo()
       break
     default:
-      console.log(' default')
   }
 }
 export default clickButton
