@@ -66,6 +66,8 @@ class XMPP {
     const type = stanza.getAttribute('type')
     const body = stanza.getElementsByTagName('body')
     const message = Strophe.getText(body[0])
+    if (type === 'error') console.log(stanza, 'STANZA')
+
     if (message === 'add_track') {
       this.addVideo()
     } else {
@@ -80,17 +82,17 @@ class XMPP {
   }
   //@ts-ignore
   addHandlerResponce = (stanza: any) => {
-
-    this.inviteFocus()
+    console.log(stanza);
+    this.sendMessageToFocus()
     return true
   }
 
   entranceToRoom(roomName: string) {
-    this.functionCreatedRoom(roomName)
+    this.functionCreatingOrEnterToRoom(roomName)
   }
 
   createRoom(roomName: string) {
-    this.functionCreatedRoom(roomName)
+    this.functionCreatingOrEnterToRoom(roomName)
     this.validateCreateRoom(roomName)
   }
 
@@ -115,7 +117,6 @@ class XMPP {
 
   addVideo() {
     this.peerConnection.pc.addTransceiver('video', { 'direction': 'recvonly' })
-
     this.peerConnection.pc.addTransceiver('audio', { 'direction': 'recvonly' })
     this.peerConnection.pc.createOffer({ 'iceRestart': true }).then(offer => {
       this.peerConnection.pc.setLocalDescription(offer)
@@ -126,7 +127,7 @@ class XMPP {
     })
   }
 
-  functionCreatedRoom(roomName: string) {
+  functionCreatingOrEnterToRoom(roomName: string) {
     this._room = roomName
     const message = new Strophe.Builder('presence', {
       from: `${this.connection.jid}`,
@@ -138,7 +139,7 @@ class XMPP {
     this.connection.send(message)
   }
 
-  inviteFocus() {
+  sendMessageToFocus() {
     const message = new Strophe.Builder('message', {
       from: `${this.connection.jid}`,
       id: this.getId(),
@@ -147,6 +148,7 @@ class XMPP {
     }).c('body').t('Proba').up().c('x', {
       xmlns: 'http://jabber.org/protocol/muc#user'
     })
+    debugger
     this.connection.send(message)
   }
 

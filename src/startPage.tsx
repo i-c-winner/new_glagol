@@ -52,7 +52,7 @@ function StartPage() {
     }
   }, [])
 
-  /*  */function startingRoomName() {
+  function startingRoomName() {
     return hasRoomName && !hasDisplayName
   }
 

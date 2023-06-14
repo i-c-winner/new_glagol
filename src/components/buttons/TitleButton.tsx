@@ -2,12 +2,9 @@ import { useState } from "react";;
 import SvgIcon from "@mui/material/SvgIcon";
 import { IconTitle } from "../icons";
 import Button from "@mui/material/Button";
-import { useSelector } from "react-redux";
-
 
 function TitleButton() {
   const [toggled, setToggled] = useState(false)
-  const localStream = useSelector((state: any) => state.roomSlice.localStream)
   function getParams() {
     const baseParams = {
       padding: "0",
