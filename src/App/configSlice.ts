@@ -7,8 +7,8 @@ export type StateConfigSlice = {
     XMPPConnected: boolean,
     iCreaterRoom: boolean,
     hasRoomName: boolean,
-    hasDisplayName: boolean,
     videoEnabled: boolean,
+    hasDisplayName: boolean,
     audioEnabled: boolean,
   }
 }

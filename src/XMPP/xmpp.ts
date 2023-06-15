@@ -66,7 +66,7 @@ class XMPP {
     const type = stanza.getAttribute('type')
     const body = stanza.getElementsByTagName('body')
     const message = Strophe.getText(body[0])
-    if (type === 'error') console.log(stanza, 'STANZA')
+    console.log(stanza);
 
     if (message === 'add_track') {
       this.addVideo()
@@ -83,7 +83,6 @@ class XMPP {
   //@ts-ignore
   addHandlerResponce = (stanza: any) => {
     console.log(stanza);
-    this.sendMessageToFocus()
     return true
   }
 
@@ -148,6 +147,7 @@ class XMPP {
     }).c('body').t('Proba').up().c('x', {
       xmlns: 'http://jabber.org/protocol/muc#user'
     })
+    console.log(message);
     this.connection.send(message)
   }
 
@@ -175,8 +175,10 @@ class XMPP {
     }).c('query', {
       xmlns: 'http://jabber.org/protocol/disco#items'
     })
+    console.log(message);
     this.connection.send(message)
   }
+
 
   getLocalStream() {
     return this.peerConnection.getLocalStream()

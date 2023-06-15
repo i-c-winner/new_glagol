@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 
 
 function RiseHandButton() {
-  const [ toggled, setToggled ] = useState(false)
+  const [toggled, setToggled] = useState(false)
 
   function getParams() {
     const baseParams = {
@@ -35,7 +35,7 @@ function RiseHandButton() {
     <SvgIcon
       viewBox="0 0 35 35"
       sx={getParams()}
-      children={IconRiseHand}/>
+      children={IconRiseHand} />
   </Button>
 }
 

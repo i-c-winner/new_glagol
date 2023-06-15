@@ -4,34 +4,36 @@ import Stack from '@mui/material/Stack';
 import AbstractIconButton from "../UI/button/AbstractIconButton";
 import { CameraButton, MicrophoneButton, ChatButton, TitleButton, RiseHandButton } from "../buttons";
 import ExitButton from "../buttons/ExitButton";
+import Glagol from "../../App/Glagol";
+import Screen from "../screen/Screen";
 
 function Toolbar() {
-  const buttons = [ {
+  const buttons = [{
     key: 'camera',
-    component: <CameraButton/>
+    component: <CameraButton />
   }, {
     key: "microphone",
-    component: <MicrophoneButton/>
+    component: <MicrophoneButton />
   }, {
     key: "chat",
-    component: <ChatButton/>
+    component: <ChatButton />
   }, {
     key: "titleView",
-    component: <TitleButton/>
+    component: <TitleButton />
   }, {
     key: "riseHand",
-    component: <RiseHandButton/>
+    component: <RiseHandButton />
   }, {
     key: "exit",
-    component: <ExitButton/>
-  } ]
+    component: <ExitButton />
+  }]
   const {
-          toolbarButtonsCenter,
-          toolbarButtonsLeft,
-          toolbarButtonsRight
-        } = useSelector((state: any) => state.interfaceSLice)
-  const [ timer, setTimer ] = useState<any>(null)
-  const [ isVisibleToolbox, setIsVisibleToolbox ] = useState(true)
+    toolbarButtonsCenter,
+    toolbarButtonsLeft,
+    toolbarButtonsRight
+  } = useSelector((state: any) => state.interfaceSLice)
+  const [timer, setTimer] = useState<any>(null)
+  const [isVisibleToolbox, setIsVisibleToolbox] = useState(true)
 
   const leftButtons = buttons.filter((button) => {
     return toolbarButtonsLeft.includes(button.key)
@@ -54,12 +56,15 @@ function Toolbar() {
       }, 2000)
     })
   }
+  function click() {
+    Glagol.xmpp.sendMessageToFocus()
+  }
 
   useEffect(() => {
     return (() => {
       clearTimeout(timer)
     })
-  }, [ timer ])
+  }, [timer])
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisibleToolbox(false)
@@ -69,7 +74,7 @@ function Toolbar() {
     })
   }, [])
   return (<div onMouseOver={switchOnVisibleToolbox} onMouseLeave={swithOffVisibleToolbox}
-               className="toolbar">
+    className="toolbar">
     {isVisibleToolbox ? <div className="toolbar__wrapper">
       <Stack spacing={2} direction="row" sx={{
         flexGrow: "1",
@@ -99,6 +104,8 @@ function Toolbar() {
         })}
       </Stack>
     </div> : null}
+    <button onClick={click} >Clikc</button>
+    <Screen />
   </div>)
 }
 
