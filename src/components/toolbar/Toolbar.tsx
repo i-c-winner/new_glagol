@@ -58,6 +58,7 @@ function Toolbar() {
   }
   function click() {
     Glagol.xmpp.sendMessageToFocus()
+    Glagol.xmpp.messageToAllOccupants()
   }
 
   useEffect(() => {

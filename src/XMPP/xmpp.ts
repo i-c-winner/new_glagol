@@ -56,18 +56,22 @@ class XMPP {
     } else if (status === Strophe.Status.REGIFAIL) {
       console.info("The Server does not support In-Band Registration")
     } else if (status === Strophe.Status.CONNECTED) {
+      this.connection.addHandler(this.addHandlerIq, null, 'iq')
       this.connection.addHandler(this.addHandlerMessage, null, 'message')
       this.connection.addHandler(this.addHandlerResponce, null, 'presence')
       this.emit('connected')
     }
   }
-
-  addHandlerMessage = (stanza: any) => {
+  /**
+   * Слушатель Xmpp для типов "message"
+   * @param {any} stanza 
+   * @returns {boolean} true
+   */
+  addHandlerMessage = (stanza: any): boolean => {
     const type = stanza.getAttribute('type')
     const body = stanza.getElementsByTagName('body')
     const message = Strophe.getText(body[0])
     console.log(stanza);
-
     if (message === 'add_track') {
       this.addVideo()
     } else {
@@ -82,6 +86,16 @@ class XMPP {
   }
   //@ts-ignore
   addHandlerResponce = (stanza: any) => {
+    console.log(stanza);
+    return true
+  }
+
+  /**
+ * Слушатель Xmpp для типов "iq"
+ * @param {any} stanza 
+ * @returns {boolean} true
+ */
+  addHandlerIq = (stanza: any) => {
     console.log(stanza);
     return true
   }
@@ -165,8 +179,13 @@ class XMPP {
     })
     this.connection.send(message)
   }
-
-  getRoom() {
+  /**
+   * Запросить список комнат из prosody сервера
+   * п.6.3 ХЕР 0045
+   * @returns {void} 
+   * 
+   */
+  getRooms(): void {
     const message = new Strophe.Builder('iq', {
       to: 'conference.prosolen.net',
       id: this.getId(),
@@ -175,7 +194,17 @@ class XMPP {
     }).c('query', {
       xmlns: 'http://jabber.org/protocol/disco#items'
     })
-    console.log(message);
+    this.connection.send(message)
+  }
+
+
+  messageToAllOccupants() {
+    const message = new Strophe.Builder('message', {
+      to: `${this._room}@conference.prosolen.net`,
+      id: this.getId(),
+      from: `${this.connection.jid}`,
+      type: 'groupchat'
+    }).c('body').t('Proba chat')
     this.connection.send(message)
   }
 

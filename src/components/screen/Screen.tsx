@@ -1,17 +1,16 @@
 import Glagol from "../../App/Glagol";
 
 function Screen() {
-
   function buttons() {
-    Glagol.xmpp.getRoom()
+    Glagol.xmpp.getRooms()
   }
 
   return (<div>
-      <p>Screen</p>
-      <button onClick={buttons}>Room</button>
+    <p>Screen</p>
+    <button onClick={buttons}>Room</button>
   </div>
 
-)
+  )
 }
 
 export default Screen;

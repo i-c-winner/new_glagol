@@ -36,6 +36,11 @@ function StartPage() {
 
     Glagol.xmppAddListener('updatedRemoteStreams', updatedRemoteStreams)
     Glagol.peerAddListener('updatedRemoteStreams', updatedRemoteStreams)
+    Glagol.xmppAddListener('receivingMessage', receivingMessage)
+
+    function receivingMessage(...args: [...[string]]) {
+
+    }
 
     function updatedRemoteStreams(...args: [...[unknown]]) {
       dispatch(wasUpdateRemoteStreams(args[0]))
