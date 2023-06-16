@@ -23,6 +23,7 @@ function ChatsMessage() {
     if (textRef.current !== null) {
       Glagol.xmpp.messageToAllOccupants({
         author: displayName,
+        id: Glagol.xmpp.getId(),
         text: textRef.current.value
       })
     }
