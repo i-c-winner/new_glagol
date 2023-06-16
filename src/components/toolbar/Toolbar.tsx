@@ -4,8 +4,6 @@ import Stack from '@mui/material/Stack';
 import AbstractIconButton from "../UI/button/AbstractIconButton";
 import { CameraButton, MicrophoneButton, ChatButton, TitleButton, RiseHandButton } from "../buttons";
 import ExitButton from "../buttons/ExitButton";
-import Glagol from "../../App/Glagol";
-import Screen from "../screen/Screen";
 
 function Toolbar() {
   const buttons = [{

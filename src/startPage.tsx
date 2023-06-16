@@ -40,7 +40,7 @@ function StartPage() {
     Glagol.xmppAddListener('receivingMessage', receivingMessage)
 
     function receivingMessage
-      (...args: [...[string]]) {
+      (...args: any) {
       dispatch(addChatStrophe(args[0]))
 
     }

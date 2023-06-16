@@ -20,7 +20,7 @@ const chatSlice = createSlice({
   },
 
   reducers: {
-    addChatStrophe: (state, action) => {
+    addChatStrophe: (state: any, action) => {
       state.chatsList.push(action.payload)
     },
     changeVisibleChats: ((state) => {
