@@ -3,6 +3,7 @@ import Glagol from "./App/Glagol";
 import { useSelector, useDispatch } from "react-redux";
 import { changeRoomName, changeHasRoomName, changeXMPPConnected, changeICreaterRoom } from "./App/configSlice";
 import { changeRoomSource, wasUpdateRemoteStreams, updateLocalStream } from "./components/bigScreen/roomSlice";
+import { addChatStrophe } from "./components/chat/ChatSlice";
 import CreatedDisplayName from "./components/room/CreatedDisplayName";
 import Room from "./components/room/Room";
 import getRandomText from "./plugins/getRandomText";
@@ -26,6 +27,7 @@ function StartPage() {
       Glagol.xmpp.peerInit()
     }
 
+
     Glagol.peerAddListener('setLocalStream', setLocalStream)
     function setLocalStream() {
       navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then((stream) => {
@@ -38,7 +40,9 @@ function StartPage() {
     Glagol.peerAddListener('updatedRemoteStreams', updatedRemoteStreams)
     Glagol.xmppAddListener('receivingMessage', receivingMessage)
 
-    function receivingMessage(...args: [...[string]]) {
+    function receivingMessage
+      (...args: [...[string]]) {
+      dispatch(addChatStrophe(args[0]))
 
     }
 

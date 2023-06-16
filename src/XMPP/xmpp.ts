@@ -69,15 +69,20 @@ class XMPP {
    */
   addHandlerMessage = (stanza: any): boolean => {
     const type = stanza.getAttribute('type')
+    const subject = stanza.getElementsByTagName('subject')
     const body = stanza.getElementsByTagName('body')
     const message = Strophe.getText(body[0])
-    console.log(stanza);
+    if (Strophe.getText(subject[0]) === "groupmessage") {
+      this.emit("receivingMessage", JSON.parse(window.atob(message)))
+    }
     if (message === 'add_track') {
       this.addVideo()
     } else {
       if (type === 'chat') {
         this.setRemoteDescription(message)
+
       }
+
     }
     return true
   }
@@ -182,8 +187,7 @@ class XMPP {
   /**
    * Запросить список комнат из prosody сервера
    * п.6.3 ХЕР 0045
-   * @returns {void} 
-   * 
+   * @returns {void}    * 
    */
   getRooms(): void {
     const message = new Strophe.Builder('iq', {
@@ -197,14 +201,21 @@ class XMPP {
     this.connection.send(message)
   }
 
-
+  /**
+   * Отправляем сообщение всем участникам
+   * @param {tring} strophe текст отправляемого сообщения
+   */
   messageToAllOccupants() {
+    const text = JSON.stringify({
+      "author": this.connection.jid,
+      "text": "bla-bla"
+    })
     const message = new Strophe.Builder('message', {
       to: `${this._room}@conference.prosolen.net`,
       id: this.getId(),
       from: `${this.connection.jid}`,
       type: 'groupchat'
-    }).c('body').t('Proba chat')
+    }).c('subject').t('groupmessage').up().c('body').t(window.btoa(text))
     this.connection.send(message)
   }
 

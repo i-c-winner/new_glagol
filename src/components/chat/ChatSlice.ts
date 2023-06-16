@@ -8,6 +8,7 @@ export type StateChatSlice = {
     }[],
     visibleChats: boolean
   }
+
 }
 
 const chatSlice = createSlice({
