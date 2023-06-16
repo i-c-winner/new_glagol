@@ -203,12 +203,12 @@ class XMPP {
 
   /**
    * Отправляем сообщение всем участникам
-   * @param {tring} strophe текст отправляемого сообщения
+   * @param {object} message объект с данными сообщения
    */
-  messageToAllOccupants() {
+  messageToAllOccupants(chatMessage: { author: string, text: string }) {
     const text = JSON.stringify({
-      "author": this.connection.jid,
-      "text": "bla-bla"
+      "author": chatMessage.author,
+      "text": chatMessage.text
     })
     const message = new Strophe.Builder('message', {
       to: `${this._room}@conference.prosolen.net`,

@@ -4,13 +4,12 @@ import styled from "@emotion/styled";
 import SvgIcon from "@mui/material/SvgIcon";
 import { IconSend } from "../icons";
 import Button from "@mui/material/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { addChatStrophe } from "./ChatSlice";
+import { useSelector } from "react-redux";
 import { StateConfigSlice } from "../../App/configSlice";
+import Glagol from "../../App/Glagol";
 
 
 function ChatsMessage() {
-  const dispatch = useDispatch()
   const { displayName } = useSelector((state: StateConfigSlice) => state.configSlice)
   const textRef = useRef<HTMLTextAreaElement | null>(null)
 
@@ -22,10 +21,10 @@ function ChatsMessage() {
 
   function sendMessage() {
     if (textRef.current !== null) {
-      dispatch(addChatStrophe({
+      Glagol.xmpp.messageToAllOccupants({
         author: displayName,
         text: textRef.current.value
-      }))
+      })
     }
   }
 

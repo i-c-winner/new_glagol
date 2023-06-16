@@ -27,7 +27,6 @@ function StartPage() {
       Glagol.xmpp.peerInit()
     }
 
-
     Glagol.peerAddListener('setLocalStream', setLocalStream)
     function setLocalStream() {
       navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then((stream) => {

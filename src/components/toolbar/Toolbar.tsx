@@ -56,10 +56,6 @@ function Toolbar() {
       }, 2000)
     })
   }
-  function click() {
-    Glagol.xmpp.sendMessageToFocus()
-    Glagol.xmpp.messageToAllOccupants()
-  }
 
   useEffect(() => {
     return (() => {
@@ -105,8 +101,6 @@ function Toolbar() {
         })}
       </Stack>
     </div> : null}
-    <button onClick={click} >Clikc</button>
-    <Screen />
   </div>)
 }
 
