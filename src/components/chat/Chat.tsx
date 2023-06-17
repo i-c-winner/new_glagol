@@ -55,7 +55,7 @@ function Chat() {
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </ListItemAvatar>
           <ListItemText
-            primary={displayName}
+            primary={chat.author}
             secondary={<React.Fragment>
               {chat.text}
             </React.Fragment>}

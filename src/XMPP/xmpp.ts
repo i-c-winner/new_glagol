@@ -207,7 +207,7 @@ class XMPP {
    */
   messageToAllOccupants(chatMessage: { author: string, text: string, id: string }) {
     const text = JSON.stringify({
-      "author": this.getId(),
+      "author": chatMessage.author,
       "text": chatMessage.text,
       "id": chatMessage.id
     })
