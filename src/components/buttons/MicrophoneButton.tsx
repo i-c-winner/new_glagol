@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { changeAudioEnabled} from "../../App/configSlice";
+import { changeAudioEnabled } from "../../App/configSlice";
 import SvgIcon from "@mui/material/SvgIcon";
 import microphone from "../icons/Microfon";
 import Button from "@mui/material/Button";
-import Glagol from "../../App/Glagol";
+import Glagol from "../../App/Glagol"
+import { StateConfigSlice } from "../../App/configSlice";
 
 
 function MicrophoneButton() {
-  const { audioEnabled } = useSelector((state: any) => state)
+  const { audioEnabled } = useSelector((state: StateConfigSlice) => state.configSlice)
+  console.log(audioEnabled);
+
   const dispatch = useDispatch()
-  const [toggled, setToggled]= useState(audioEnabled)
+  const [toggled, setToggled] = useState(audioEnabled)
+  console.log(toggled);
 
   function getParams() {
     const baseParams = {
@@ -19,7 +23,7 @@ function MicrophoneButton() {
       height: "40px",
       borderRadius: "3px"
     }
-    if (!toggled) {
+    if (toggled) {
       return {
         ...baseParams,
         color: '#00ff85'
@@ -40,10 +44,10 @@ function MicrophoneButton() {
   }
 
   return <Button onClick={click} sx={{ padding: "0" }}>
-  <SvgIcon
-    viewBox="0 0 35 35"
-  sx={getParams()}
-  children={microphone}/>
+    <SvgIcon
+      viewBox="0 0 35 35"
+      sx={getParams()}
+      children={microphone} />
   </Button>
 }
 

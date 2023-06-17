@@ -91,7 +91,6 @@ class XMPP {
   }
   //@ts-ignore
   addHandlerResponce = (stanza: any) => {
-    console.log(stanza);
     return true
   }
 
@@ -101,7 +100,6 @@ class XMPP {
  * @returns {boolean} true
  */
   addHandlerIq = (stanza: any) => {
-    console.log(stanza);
     return true
   }
 
@@ -166,7 +164,6 @@ class XMPP {
     }).c('body').t('Proba').up().c('x', {
       xmlns: 'http://jabber.org/protocol/muc#user'
     })
-    console.log(message);
     this.connection.send(message)
   }
 
