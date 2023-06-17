@@ -3,7 +3,7 @@ export type StateRoomSlice = {
     roomSlice: {
         roomSource: boolean
         remoteStreamsWereUpdated: boolean,
-        localStream: any
+        localStream: MediaStream
     }
 }
 const roomSlice = createSlice({

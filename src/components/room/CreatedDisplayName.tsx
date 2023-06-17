@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDisplayName, changeHasDisplayName } from "../../App/configSlice";
 import Glagol from "../../App/Glagol";
@@ -20,7 +20,7 @@ function CreatedDisplayName(props: Props) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [currentDisplayName, setCurrenDisplayName] = useState('')
-  const displayNameRef = useRef<any>()
+  const displayNameRef = useRef<HTMLInputElement>(null)
   const {
     iCreaterRoom,
     roomName
@@ -29,18 +29,10 @@ function CreatedDisplayName(props: Props) {
     return state.roomSlice
   }
   )
-  const refVideo = useRef<any>()
-
-  useEffect(() => {
-    if (roomSource) {
-      refVideo.current.srcObject = Glagol.getLocalStream()
-    }
-  }, [roomSource])
 
   function creatingUser() {
     dispatch(changeHasDisplayName(true))
-
-    dispatch(changeDisplayName(displayNameRef.current.value))
+    if (displayNameRef.current) dispatch(changeDisplayName(displayNameRef.current.value))
     if (iCreaterRoom) {
       Glagol.xmpp.createRoom(roomName)
     } else {
@@ -50,7 +42,7 @@ function CreatedDisplayName(props: Props) {
   }
 
   function changeCurrentDisplayName() {
-    setCurrenDisplayName(displayNameRef.current.value)
+    if (displayNameRef.current) setCurrenDisplayName(displayNameRef.current.value)
   }
 
   function chackButton() {
@@ -117,7 +109,7 @@ function CreatedDisplayName(props: Props) {
             <MicrophoneButton />
           </Box>
         </Box>
-        <div className="video" ref={refVideo}>
+        <div className="video" >
           <BigScreen />
         </div>
 
