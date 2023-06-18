@@ -5,10 +5,10 @@ import Glagol from "../../../App/Glagol";
 type Params = {
   dispatch: Function,
   button: string,
-  state?: any
+  state?: unknown
 }
 function clickButton(params: Params) {
-
+  debugger
   switch (params.button) {
     case "chat":
       params.dispatch(changeVisibleChats())
