@@ -16,7 +16,6 @@ Glagol.peerAddListener('doSignagling', Glagol.xmpp.doSignaling)
 
 function StartPage() {
   const dispatch = useDispatch()
-
   const hasRoomName = useSelector((state: StateConfigSlice) => state.configSlice.hasRoomName)
   const hasDisplayName = useSelector((state: StateConfigSlice) => state.configSlice.hasDisplayName)
   const navigate = useNavigate()
@@ -42,7 +41,6 @@ function StartPage() {
     function receivingMessage
       (...args: any) {
       dispatch(addChatStrophe(args[0]))
-
     }
 
     function updatedRemoteStreams(...args: [...[unknown]]) {

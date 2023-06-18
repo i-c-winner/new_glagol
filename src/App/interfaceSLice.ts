@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toolbarButtonsCenter, toolbarButtonsLeft, toolbarButtonsRight } from "./constants";
-
+export type StateInterfaceSlice = {
+  interfaceSLice: {
+    toolbarButtonsCenter: [...string[]]
+    toolbarButtonsLeft: [...string[]]
+    toolbarButtonsRight: [...string[]]
+  }
+}
 const interfaceSlice = createSlice({
   name: 'interface',
   initialState: {

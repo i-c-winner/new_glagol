@@ -10,11 +10,8 @@ import { StateConfigSlice } from "../../App/configSlice";
 
 function MicrophoneButton() {
   const { audioEnabled } = useSelector((state: StateConfigSlice) => state.configSlice)
-  console.log(audioEnabled);
-
   const dispatch = useDispatch()
   const [toggled, setToggled] = useState(audioEnabled)
-  console.log(toggled);
 
   function getParams() {
     const baseParams = {

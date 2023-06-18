@@ -4,6 +4,7 @@ import Stack from '@mui/material/Stack';
 import AbstractIconButton from "../UI/button/AbstractIconButton";
 import { CameraButton, MicrophoneButton, ChatButton, TitleButton, RiseHandButton } from "../buttons";
 import ExitButton from "../buttons/ExitButton";
+import { StateInterfaceSlice } from "../../App/interfaceSLice";
 
 function Toolbar() {
   const buttons = [{
@@ -29,8 +30,8 @@ function Toolbar() {
     toolbarButtonsCenter,
     toolbarButtonsLeft,
     toolbarButtonsRight
-  } = useSelector((state: any) => state.interfaceSLice)
-  const [timer, setTimer] = useState<any>(null)
+  } = useSelector((state: StateInterfaceSlice) => state.interfaceSLice)
+  const [timer, setTimer] = useState<any>(0)
   const [isVisibleToolbox, setIsVisibleToolbox] = useState(true)
 
   const leftButtons = buttons.filter((button) => {
