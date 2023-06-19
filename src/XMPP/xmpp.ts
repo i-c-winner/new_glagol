@@ -80,9 +80,7 @@ class XMPP {
     } else {
       if (type === 'chat') {
         this.setRemoteDescription(message)
-
       }
-
     }
     return true
   }
@@ -216,7 +214,18 @@ class XMPP {
     }).c('subject').t('groupmessage').up().c('body').t(window.btoa(text))
     this.connection.send(message)
   }
+  /**
+   * Отправка файлов
+   * @ param {any} file отправляемый файл
+   * @ returns {void}
+   */
+  sendFile(file: any): void {
+    console.log(file);
+  }
 
+  xmppOnListener(event: string, callback: Function) {
+    onListeners.call(this, event, callback)
+  }
 
   getLocalStream() {
     return this.peerConnection.getLocalStream()
@@ -224,10 +233,6 @@ class XMPP {
 
   getRemoteStreams() {
     return this.peerConnection.getRemoteStreams()
-  }
-
-  xmppOnListener(event: string, callback: Function) {
-    onListeners.call(this, event, callback)
   }
 
   changeVisibleVideo() {

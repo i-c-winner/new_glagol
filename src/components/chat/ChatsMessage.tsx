@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { TextareaAutosize } from "@mui/material";
+import { useRef, useState } from "react";
+import { Input, TextareaAutosize, Box } from "@mui/material";
 import styled from "@emotion/styled";
 import SvgIcon from "@mui/material/SvgIcon";
 import { IconSend } from "../icons";
@@ -12,7 +12,7 @@ import Glagol from "../../App/Glagol";
 function ChatsMessage() {
   const { displayName } = useSelector((state: StateConfigSlice) => state.configSlice)
   const textRef = useRef<HTMLTextAreaElement | null>(null)
-
+  const [selectedFile, setSelectedFile] = useState<[any]>([null])
   function changeMessage(event: any) {
     if (typeof textRef.current !== null) {
       if (textRef.current !== null) textRef.current.value = event.target.value;
@@ -20,6 +20,7 @@ function ChatsMessage() {
   }
 
   function sendMessage() {
+    // Glagol.sendFile(selectedFile)
     if (textRef.current !== null) {
       Glagol.xmpp.messageToAllOccupants({
         author: displayName,
@@ -29,6 +30,9 @@ function ChatsMessage() {
     }
   }
 
+  function selectFiles(event: any) {
+    setSelectedFile(event.target.files[0])
+  }
   const TextArea = styled(TextareaAutosize)(() => {
     return `
 width: 100%;
@@ -37,20 +41,31 @@ padding: 10px 5px;
 border-radius: 5px
 `
 
+
   })
   return <div className="chat-message">
-    <TextArea ref={textRef} onChange={changeMessage} placeholder="Введите сообщение" />
-    <Button sx={{
-      color: "white",
-      "&:hover": {
-        color: "#00ff85",
-        cursor: "pointer"
-      }
-    }}
-      className="send__icon"
-      onClick={sendMessage}>
-      <SvgIcon children={IconSend} />
-    </Button>
+    <Input sx={{
+      "&:before": {
+        borderBottom: "none"
+      },
+    }} type="file" onChange={selectFiles} />
+    <Box sx={{
+      display: "flex",
+      margin: "10px auto 0",
+    }}>
+      <TextArea ref={textRef} onChange={changeMessage} placeholder="Введите сообщение" />
+      <Button sx={{
+        color: "white",
+        "&:hover": {
+          color: "#00ff85",
+          cursor: "pointer"
+        }
+      }}
+        className="send__icon"
+        onClick={sendMessage}>
+        <SvgIcon children={IconSend} />
+      </Button>
+    </Box>
   </div>
 
 

@@ -24,6 +24,7 @@
     padding: 10px 20px;
     background-color: var(--dark-theme-bgfield);
     display: flex;
+    flex-flow: column;
     justify-content: space-between;
   }
 }
