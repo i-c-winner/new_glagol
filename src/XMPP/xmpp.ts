@@ -1,7 +1,6 @@
 import getRandomText from "../plugins/getRandomText";
 import { onListeners, emitListeners } from "../plugins/createListeners";
 import PeerConnection from "../WebRtc/WebRtc";
-import { debounce } from "@mui/material";
 
 const { Strophe }: any = require('strophe.js')
 //@ts-ignore
@@ -57,7 +56,6 @@ class XMPP {
     } else if (status === Strophe.Status.REGIFAIL) {
       console.info("The Server does not support In-Band Registration")
     } else if (status === Strophe.Status.CONNECTED) {
-      this.connection.addHandler(this.addHandlerIq, null, 'iq')
       this.connection.addHandler(this.addHandlerMessage, null, 'message')
       this.connection.addHandler(this.addHandlerResponce, null, 'presence')
       this.emit('connected')
@@ -98,10 +96,6 @@ class XMPP {
  * @param {any} stanza 
  * @returns {boolean} true
  */
-  addHandlerIq = (stanza: any) => {
-    return true
-  }
-
   entranceToRoom(roomName: string) {
     this.functionCreatingOrEnterToRoom(roomName)
   }

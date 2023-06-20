@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, DOMElement, RefObject } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from "react-redux";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
