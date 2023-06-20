@@ -7,12 +7,13 @@ import Button from "@mui/material/Button";
 import { useSelector } from "react-redux";
 import { StateConfigSlice } from "../../App/configSlice";
 import Glagol from "../../App/Glagol";
+import { getTextButton } from "./functions";
 
 
 function ChatsMessage() {
   const { displayName } = useSelector((state: StateConfigSlice) => state.configSlice)
   const textRef = useRef<HTMLTextAreaElement | null>(null)
-  const [selectedFile, setSelectedFile] = useState<any>([])
+  const [selectedFile, setSelectedFile] = useState<any>(null)
   const [nameFile, setNameFile] = useState<string>("Выбрать файл")
   function changeMessage(event: any) {
     if (typeof textRef.current !== null) {
@@ -39,15 +40,17 @@ border-radius: 5px
 `
   })
   function selectingFile(event: any) {
-    setSelectedFile(event.target.files[0])
+    console.log(event.target.files);
+    setSelectedFile(event.target.files)
   }
   function sendFile() {
+    setSelectedFile(null)
     Glagol.sendFile(selectedFile)
   }
   return <div className="chat-message">
     <div className="inputs">
-      <input onChange={selectingFile} className="input-file" type="file" id="file" />
-      <label className="input-file__label" htmlFor="file">{nameFile}</label>
+      <input onChange={selectingFile} className="input-file" type="file" multiple id="file" />
+      <label className="input-file__label" htmlFor="file">{getTextButton(selectedFile)}</label>
       <Button sx={{
         color: "white",
         "&:hover": {
