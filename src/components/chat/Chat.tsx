@@ -34,6 +34,8 @@ function Chat() {
       width: '100%',
       maxWidth: 360,
       bgcolor: 'rgba(6,6,6,.16)',
+      marginBottom: "180px"
+
     }}
       classes={{
         root: 'chats-list'

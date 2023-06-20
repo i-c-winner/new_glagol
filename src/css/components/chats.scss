@@ -13,8 +13,12 @@
   bottom: 100px;
   left: 15px;
   width: 350px;
-  overflow-y: scroll;
   background-color: rgba(225, 225, 225, .7);
+
+  &-list {
+    overflow-y: scroll;
+    margin-bottom: 180px;
+  }
 
   .chat-message {
     position: absolute;
