@@ -1,6 +1,7 @@
 import getRandomText from "../plugins/getRandomText";
 import { onListeners, emitListeners } from "../plugins/createListeners";
 import PeerConnection from "../WebRtc/WebRtc";
+import { debounce } from "@mui/material";
 
 const { Strophe }: any = require('strophe.js')
 //@ts-ignore
@@ -201,6 +202,7 @@ class XMPP {
    * @param {object} chatMessage объект с данными сообщения
    */
   messageToAllOccupants(chatMessage: { author: string, text: string, id: string }) {
+    debugger
     const text = JSON.stringify({
       "author": chatMessage.author,
       "text": chatMessage.text,

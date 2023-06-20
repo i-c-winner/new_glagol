@@ -8,13 +8,14 @@ import { useSelector } from "react-redux";
 import { StateConfigSlice } from "../../App/configSlice";
 import Glagol from "../../App/Glagol";
 import { getTextButton } from "./functions";
+import type { Message } from "./Chat";
 
 
 function ChatsMessage() {
   const { displayName } = useSelector((state: StateConfigSlice) => state.configSlice)
   const textRef = useRef<HTMLTextAreaElement | null>(null)
   const [selectedFile, setSelectedFile] = useState<any>(null)
-  const [nameFile, setNameFile] = useState<string>("Выбрать файл")
+  const messages = useSelector((state: any) => state.chatSlice)
   function changeMessage(event: any) {
     if (typeof textRef.current !== null) {
       if (textRef.current !== null) textRef.current.value = event.target.value;
@@ -46,6 +47,27 @@ border-radius: 5px
   function sendFile() {
     setSelectedFile(null)
     Glagol.sendFile(selectedFile)
+  }
+  function ckick() {
+    let text = ''
+    let author = ''
+    messages.chatsList.map((message: Message) => {
+      function getAuthor() {
+        if (message.author !== author) {
+          author = message.author
+          return "_____________________________________" + "\n" + "Автор: " + message.author + "\n"
+        }
+        return ''
+      }
+      text = text + getAuthor() + "Сообщение: " + message.text + "\n\n"
+    })
+    const blob = new Blob([text])
+    console.log(text);
+    const virtualButton = document.createElement('a')
+    virtualButton.setAttribute('href', URL.createObjectURL(blob))
+    virtualButton.setAttribute('download', 'chat.doc')
+    virtualButton.click()
+
   }
   return <div className="chat-message">
     <div className="inputs">
@@ -82,9 +104,8 @@ border-radius: 5px
         <SvgIcon children={IconSend} />
       </Button>
     </Box>
+    <button onClick={ckick} >click</button>
   </div>
-
-
 }
 
 

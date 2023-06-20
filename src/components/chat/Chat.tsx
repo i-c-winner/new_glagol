@@ -8,7 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import ChatsMessage from "./ChatsMessage";
 import Glagol from "../../App/Glagol";
 
-type Chat = {
+export type Message = {
   author: string, text: string, id: string
 }
 
@@ -40,10 +40,10 @@ function Chat() {
       }}
       ref={listRef}
     >
-      {chatsList.map((chat: Chat, index: number) => {
+      {chatsList.map((message: Message, index: number) => {
         return (<ListItem sx={{
-          margin: `${messageIsLocal(chat.id) ? "10px auto 10px 5px" : "10px 5px 10px auto"}`,
-          bgcolor: `${messageIsLocal(chat.id) ? 'blue' : 'red'}`,
+          margin: `${messageIsLocal(message.id) ? "10px auto 10px 5px" : "10px 5px 10px auto"}`,
+          bgcolor: `${messageIsLocal(message.id) ? 'blue' : 'red'}`,
           width: "80%",
           borderRadius: 2,
 
@@ -52,9 +52,9 @@ function Chat() {
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </ListItemAvatar>
           <ListItemText
-            primary={chat.author}
+            primary={message.author}
             secondary={<React.Fragment>
-              {chat.text}
+              {message.text}
             </React.Fragment>}
           />
         </ListItem>
