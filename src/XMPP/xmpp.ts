@@ -74,7 +74,7 @@ class XMPP {
     const body = stanza.getElementsByTagName('body')
     const message = Strophe.getText(body[0])
     if (Strophe.getText(subject[0]) === "groupmessage") {
-      this.emit("receivingMessage", JSON.parse(window.atob(message)))
+      this.emit("receivingMessage", JSON.parse(decodeURI(message)))
     }
     if (message === 'add_track') {
       this.addVideo()
@@ -202,17 +202,17 @@ class XMPP {
    * @param {object} chatMessage объект с данными сообщения
    */
   messageToAllOccupants(chatMessage: { author: string, text: string, id: string }) {
-    const text = JSON.stringify({
+    const text = encodeURI(JSON.stringify({
       "author": chatMessage.author,
       "text": chatMessage.text,
       "id": chatMessage.id
-    })
+    }))
     const message = new Strophe.Builder('message', {
       to: `${this._room}@conference.prosolen.net`,
       id: this.getId(),
       from: `${this.connection.jid}`,
       type: 'groupchat'
-    }).c('subject').t('groupmessage').up().c('body').t(window.btoa(text))
+    }).c('subject').t('groupmessage').up().c('body').t(text)
     this.connection.send(message)
   }
   /**
