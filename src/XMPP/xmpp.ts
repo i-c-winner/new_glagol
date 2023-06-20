@@ -202,7 +202,6 @@ class XMPP {
    * @param {object} chatMessage объект с данными сообщения
    */
   messageToAllOccupants(chatMessage: { author: string, text: string, id: string }) {
-    debugger
     const text = JSON.stringify({
       "author": chatMessage.author,
       "text": chatMessage.text,

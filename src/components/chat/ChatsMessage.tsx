@@ -48,7 +48,7 @@ border-radius: 5px
     setSelectedFile(null)
     Glagol.sendFile(selectedFile)
   }
-  function ckick() {
+  function saveMessage() {
     let text = ''
     let author = ''
     messages.chatsList.map((message: Message) => {
@@ -62,13 +62,12 @@ border-radius: 5px
       text = text + getAuthor() + "Сообщение: " + message.text + "\n\n"
     })
     const blob = new Blob([text])
-    console.log(text);
     const virtualButton = document.createElement('a')
     virtualButton.setAttribute('href', URL.createObjectURL(blob))
     virtualButton.setAttribute('download', 'chat.doc')
     virtualButton.click()
-
   }
+
   return <div className="chat-message">
     <div className="inputs">
       <input onChange={selectingFile} className="input-file" type="file" multiple id="file" />
@@ -104,7 +103,16 @@ border-radius: 5px
         <SvgIcon children={IconSend} />
       </Button>
     </Box>
-    <button onClick={ckick} >click</button>
+    <Button sx={{
+      color: "white",
+      background: "grey",
+      marginBottom: "10px",
+      "&:hover": {
+        color: "black",
+        background: "red",
+        cursor: "pointer"
+      }
+    }} onClick={saveMessage}>Сохранить чат</Button>
   </div>
 }
 
