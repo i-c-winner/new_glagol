@@ -5,6 +5,7 @@ import AbstractIconButton from "../UI/button/AbstractIconButton";
 import { CameraButton, MicrophoneButton, ChatButton, TitleButton, RiseHandButton } from "../buttons";
 import ExitButton from "../buttons/ExitButton";
 import { StateInterfaceSlice } from "../../App/interfaceSLice";
+import { Link } from "react-router-dom";
 
 function Toolbar() {
   const buttons = [{
@@ -100,7 +101,8 @@ function Toolbar() {
         })}
       </Stack>
     </div> : null}
-  </div>)
+    <Link to="/whiteboard">whiteboard</Link>
+  </div >)
 }
 
 export default Toolbar;
